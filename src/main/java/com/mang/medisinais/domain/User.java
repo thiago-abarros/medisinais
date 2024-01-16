@@ -54,15 +54,15 @@ public class User {
   private byte[] photo;
 
   public User(UserDTO userDTO) {
-    this.name = userDTO.getName();
-    this.email = userDTO.getEmail();
-    this.cpf = userDTO.getCpf();
-    this.address = userDTO.getAddress();
-    this.cellphone = userDTO.getCellphone();
-    this.healthInsurancePlan = userDTO.getHealthInsurancePlan();
-    this.professionalType = userDTO.getProfessionalType();
-    this.password = userDTO.getPassword();
-    this.photo = userDTO.getPhoto();
+    this.name = userDTO.name();
+    this.email = userDTO.email();
+    this.cpf = userDTO.cpf();
+    this.address = userDTO.address();
+    this.cellphone = userDTO.cellphone();
+    this.healthInsurancePlan = userDTO.healthInsurancePlan();
+    this.professionalType = userDTO.professionalType();
+    this.password = userDTO.password();
+    this.photo = userDTO.photo();
     this.slug = Slug.makeSlug(userDTO.name());
   }
 }
