@@ -6,8 +6,9 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum ProfessionalType {
-  MEDIC("Médico"),
-  PSYCHOLOGIST("Psicólogo");
+  DOCTOR("Médico"),
+  PSYCHOLOGIST("Psicólogo"),
+  NUTRICIAN("Nutricionista");
 
   private final String name;
 }
