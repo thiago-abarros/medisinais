@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "professional")
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,8 +42,8 @@ public class User {
   private String password;
 
   @Column(name = "user_address")
-  @OneToMany(mappedBy = "users")
-  private Address address;
+  @OneToMany(mappedBy = "user")
+  private List<Address> address;
 
   @Column(unique = true)
   private String cpf;

@@ -12,7 +12,7 @@ public record UserDTO(
     List<HealthInsurancePlan> healthInsurancePlan,
     String email,
     String password,
-    Address address,
+    List<Address> address,
     String cpf,
     String cellphone,
     byte[] photo) {}

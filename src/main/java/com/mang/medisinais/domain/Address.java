@@ -29,4 +29,5 @@ public class Address {
 
   @ManyToOne
   private User user;
+
 }
