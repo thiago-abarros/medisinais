@@ -27,6 +27,6 @@ public class Address {
 
   private String state;
 
-  @OneToMany(mappedBy = "user_address")
-  private List<User> users;
+  @ManyToOne
+  private User user;
 }
