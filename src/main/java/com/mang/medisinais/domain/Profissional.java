@@ -43,7 +43,7 @@ public class User {
 
   @Column(name = "user_address")
   @OneToMany(mappedBy = "user")
-  private List<Address> address;
+  private List<Endereco> enderecos;
 
   @Column(unique = true)
   private String cpf;
@@ -58,7 +58,7 @@ public class User {
     this.name = userDTO.name();
     this.email = userDTO.email();
     this.cpf = userDTO.cpf();
-    this.address = userDTO.address();
+    this.enderecos = userDTO.enderecos();
     this.cellphone = userDTO.cellphone();
     this.healthInsurancePlan = userDTO.healthInsurancePlan();
     this.professionalType = userDTO.professionalType();
