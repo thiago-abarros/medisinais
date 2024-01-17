@@ -7,21 +7,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum PlanoSaudeValido {
 
-  BRADESCO("Bradesco Saúde", "bradesco",3L),
-  UNIMED("Unimed", "unimed", 1L),
-  AMIL("Amil", "amil", 2L);
+  BRADESCO("Bradesco Saúde", "bradesco"),
+  UNIMED("Unimed", "unimed"),
+  AMIL("Amil", "amil");
 
   private final String nome;
   private final String slug;
-  private final Long id;
 
-  public static Long valueOfNome(String nome) {
+  public static PlanoSaudeValido valueOfNome(String nome) {
     for(PlanoSaudeValido p : values()) {
       if(p.getSlug().equals(nome)) {
-        return p.getId();
+        return p;
       }
     }
-    return 0L;
+    return null;
   }
 
 }

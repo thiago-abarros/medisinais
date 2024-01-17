@@ -3,6 +3,7 @@ package com.mang.medisinais.services;
 import com.mang.medisinais.domain.Profissional;
 import com.mang.medisinais.domain.dto.FiltroDTO;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
+import com.mang.medisinais.domain.enums.PlanoSaudeValido;
 import com.mang.medisinais.repositories.ProfissionalRepository;
 import com.mang.medisinais.specifications.ProfissionalSpecification;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,13 @@ public class ProfissionalService {
   private final ProfissionalRepository userRepo;
 
   public List<Profissional> pesquisaProfissionais(FiltroDTO filtro) {
+    var especialidade = EspecialidadeProfissional.valueOfNome(filtro.especialidade());
+    var plano = PlanoSaudeValido.valueOfNome(filtro.planoSaude());
+
     return userRepo.findAll(Specification
             .where(ProfissionalSpecification.temCidade(filtro.cidade())
-            .and(ProfissionalSpecification.temEspecialidade(EspecialidadeProfissional.valueOfNome(filtro.especialidade()))))
-            .and(ProfissionalSpecification.temPlanoSaude(filtro.planoSaude())));
+            .and(ProfissionalSpecification.temEspecialidade(especialidade)))
+            .and(ProfissionalSpecification.temPlanoSaude(plano)));
   }
 
 }
