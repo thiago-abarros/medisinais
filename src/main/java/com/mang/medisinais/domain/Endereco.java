@@ -1,33 +1,37 @@
 package com.mang.medisinais.domain;
 
 import jakarta.persistence.*;
-import java.util.List;
 import lombok.*;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class Address {
+public class Endereco {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "address_id")
+  @Column(name = "id_endereco")
   private Long id;
 
-  @Column(name = "building_number")
-  private Integer buildingNumber;
+  private String rua;
+
+  private String bairro;
+
+  private String cidade;
+
+  private String uf;
 
   private String cep;
 
-  private String street;
-
-  private String neighbourhood;
-
-  private String city;
-
-  private String state;
-
   @ManyToOne
-  private User user;
+  private Profissional profissional;
 
+  public Endereco(String rua, String bairro, String cidade, String uf, String cep) {
+    this.rua = rua;
+    this.bairro = bairro;
+    this.cidade = cidade;
+    this.uf = uf;
+    this.cep = cep;
+  }
 }

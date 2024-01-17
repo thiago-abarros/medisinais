@@ -5,10 +5,21 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ProfessionalType {
-  DOCTOR("Médico"),
-  PSYCHOLOGIST("Psicólogo"),
-  NUTRICIAN("Nutricionista");
+public enum EspecialidadeProfissional {
 
-  private final String name;
+  MEDICO("medico"),
+  PSICOLOGO("psicologo"),
+  NUTRICIONISTA("nutricionista");
+
+  private final String nome;
+
+  public static EspecialidadeProfissional valueOfNome(String nome) {
+    for(EspecialidadeProfissional e : values()) {
+      if(e.getNome().equals(nome)){
+        return e;
+      }
+    }
+    return null;
+  }
+
 }

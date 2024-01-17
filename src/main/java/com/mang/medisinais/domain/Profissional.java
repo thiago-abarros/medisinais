@@ -1,8 +1,7 @@
 package com.mang.medisinais.domain;
 
-import com.mang.medisinais.domain.dto.UserDTO;
-import com.mang.medisinais.domain.enums.HealthInsurancePlan;
-import com.mang.medisinais.domain.enums.ProfessionalType;
+import com.mang.medisinais.domain.dto.ProfissionalDTO;
+import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
 import com.mang.medisinais.utility.Slug;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,57 +12,55 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "professional")
-public class User {
+@Table(name = "profissional")
+public class Profissional {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "user_id")
+  @Column(name = "id_profissional")
   private Long id;
 
-  @Column(name = "user_name", nullable = false)
-  private String name;
+  private String nome;
 
-  @Column(name = "user_slug", unique = true)
+  @Column(unique = true)
   private String slug;
 
   @Enumerated(EnumType.STRING)
-  @Column(name = "professional_type")
-  private ProfessionalType professionalType;
+  private EspecialidadeProfissional especialidade;
 
   @Enumerated(EnumType.STRING)
-  @CollectionTable(name = "user_health_insurance", joinColumns = @JoinColumn(name = "user_id"))
-  @Column(name = "health_insurance_plan")
-  private List<HealthInsurancePlan> healthInsurancePlan;
+  @ManyToMany(mappedBy = "profissionais")
+  @Column(name = "planos_aceitos")
+  private List<PlanoSaude> planosAceitos;
 
   @Column(unique = true)
   private String email;
 
-  @Column(name = "user_password")
-  private String password;
+  private String senha;
 
-  @Column(name = "user_address")
-  @OneToMany(mappedBy = "user")
+  @OneToMany(mappedBy = "profissional")
   private List<Endereco> enderecos;
 
   @Column(unique = true)
   private String cpf;
 
   @Column(unique = true)
-  private String cellphone;
+  private String telefone;
 
-  @Column(name = "user_photo")
-  private byte[] photo;
+  @Column(name = "foto_usuario")
+  private byte[] foto;
 
-  public User(UserDTO userDTO) {
-    this.name = userDTO.name();
-    this.email = userDTO.email();
-    this.cpf = userDTO.cpf();
-    this.enderecos = userDTO.enderecos();
-    this.cellphone = userDTO.cellphone();
-    this.healthInsurancePlan = userDTO.healthInsurancePlan();
-    this.professionalType = userDTO.professionalType();
-    this.password = userDTO.password();
-    this.photo = userDTO.photo();
-    this.slug = Slug.makeSlug(userDTO.name());
+  public Profissional(ProfissionalDTO profissionalDTO) {
+    this.nome = profissionalDTO.nome();
+    this.email = profissionalDTO.email();
+    this.cpf = profissionalDTO.cpf();
+    this.enderecos = profissionalDTO.enderecos();
+    this.telefone = profissionalDTO.telefone();
+    this.planosAceitos = profissionalDTO.planosAceitos().stream().map(PlanoSaude::new).toList();
+    this.especialidade = profissionalDTO.especialidade();
+    this.senha = profissionalDTO.senha();
+    this.foto = profissionalDTO.foto();
+    this.slug = Slug.makeSlug(profissionalDTO.nome());
   }
+
 }
