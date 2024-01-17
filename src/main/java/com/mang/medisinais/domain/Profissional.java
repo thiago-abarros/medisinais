@@ -1,8 +1,8 @@
 package com.mang.medisinais.domain;
 
+import com.github.slugify.Slugify;
 import com.mang.medisinais.domain.dto.ProfissionalDTO;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
-import com.mang.medisinais.utility.Slug;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -60,7 +60,7 @@ public class Profissional {
     this.especialidade = profissionalDTO.especialidade();
     this.senha = profissionalDTO.senha();
     this.foto = profissionalDTO.foto();
-    this.slug = Slug.makeSlug(profissionalDTO.nome());
+    this.slug = Slugify.builder().build().slugify(profissionalDTO.nome());
   }
 
 }
