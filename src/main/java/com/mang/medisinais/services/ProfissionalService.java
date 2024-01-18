@@ -2,6 +2,7 @@ package com.mang.medisinais.services;
 
 import com.mang.medisinais.domain.Profissional;
 import com.mang.medisinais.domain.dto.FiltroDTO;
+import com.mang.medisinais.domain.dto.ResultadoDTO;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
 import com.mang.medisinais.domain.enums.PlanoSaudeValido;
 import com.mang.medisinais.repositories.ProfissionalRepository;
@@ -26,6 +27,16 @@ public class ProfissionalService {
             .where(ProfissionalSpecification.temCidade(filtro.cidade())
             .and(ProfissionalSpecification.temEspecialidade(especialidade)))
             .and(ProfissionalSpecification.temPlanoSaude(plano)));
+  }
+
+  public ResultadoDTO encontrarPorSlug(String slug) {
+    Profissional resultado = userRepo.findBySlug(slug);
+
+    if(resultado == null) {
+      return null;
+    }
+
+    return ResultadoDTO.fromProfissional(userRepo.findBySlug(slug));
   }
 
 }

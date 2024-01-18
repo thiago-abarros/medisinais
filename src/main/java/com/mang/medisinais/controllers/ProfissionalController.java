@@ -4,6 +4,7 @@ import com.mang.medisinais.domain.Profissional;
 import com.mang.medisinais.domain.dto.FiltroDTO;
 import com.mang.medisinais.domain.dto.LoginDTO;
 import com.mang.medisinais.domain.dto.ProfissionalDTO;
+import com.mang.medisinais.domain.dto.ResultadoDTO;
 import com.mang.medisinais.services.ProfissionalService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.RequestEntity;
@@ -30,7 +31,6 @@ public class ProfissionalController {
     return null;
   }
 
-
   @GetMapping("/pesquisa")
   public String pesquisaProfissionais (FiltroDTO filtroDTO, ModelMap model) {
 
@@ -38,6 +38,19 @@ public class ProfissionalController {
     model.addAttribute("profissionais", profissionais);
 
     return "listaProfissionais";
+  }
+
+  @GetMapping("/profissional/{slug}")
+  public String paginaProfissional(@PathVariable String slug, ModelMap model) {
+    ResultadoDTO profissional = profissionalService.encontrarPorSlug(slug);
+
+    if(profissional == null) {
+      return "erro";
+    }
+
+    model.addAttribute("profissional", profissional);
+
+    return "paginaProfissional";
   }
 
 }
