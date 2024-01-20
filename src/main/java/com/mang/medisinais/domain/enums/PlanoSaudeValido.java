@@ -15,8 +15,8 @@ public enum PlanoSaudeValido {
   private final String slug;
 
   public static PlanoSaudeValido valueOfNome(String nome) {
-    for(PlanoSaudeValido p : values()) {
-      if(p.getSlug().equals(nome)) {
+    for (PlanoSaudeValido p : values()) {
+      if (p.getSlug().equals(nome)) {
         return p;
       }
     }

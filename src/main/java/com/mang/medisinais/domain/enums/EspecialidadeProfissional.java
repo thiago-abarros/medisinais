@@ -14,8 +14,8 @@ public enum EspecialidadeProfissional {
   private final String nome;
 
   public static EspecialidadeProfissional valueOfNome(String nome) {
-    for(EspecialidadeProfissional e : values()) {
-      if(e.getNome().equals(nome)){
+    for (EspecialidadeProfissional e : values()) {
+      if (e.getNome().equals(nome)) {
         return e;
       }
     }
