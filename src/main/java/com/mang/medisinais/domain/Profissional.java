@@ -1,12 +1,23 @@
 package com.mang.medisinais.domain;
 
 import com.github.slugify.Slugify;
-import com.mang.medisinais.domain.dto.ProfissionalDTO;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
-import jakarta.persistence.*;
-import lombok.*;
-
+import com.mang.medisinais.dto.ProfissionalDTO;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @AllArgsConstructor
@@ -26,10 +37,11 @@ public class Profissional {
   private String slug;
 
   @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
   private EspecialidadeProfissional especialidade;
 
   @Enumerated(EnumType.STRING)
-  @ManyToMany(mappedBy = "profissionais")
+  @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
   @Column(name = "planos_aceitos")
   private List<PlanoSaude> planosAceitos;
 
@@ -56,7 +68,9 @@ public class Profissional {
     this.cpf = profissionalDTO.cpf();
     this.enderecos = profissionalDTO.enderecos();
     this.telefone = profissionalDTO.telefone();
-    this.planosAceitos = profissionalDTO.planosAceitos().stream().map(PlanoSaude::new).toList();
+    if (profissionalDTO.planosAceitos() != null) {
+      this.planosAceitos = profissionalDTO.planosAceitos().stream().map(PlanoSaude::new).toList();
+    }
     this.especialidade = profissionalDTO.especialidade();
     this.senha = profissionalDTO.senha();
     this.foto = profissionalDTO.foto();
