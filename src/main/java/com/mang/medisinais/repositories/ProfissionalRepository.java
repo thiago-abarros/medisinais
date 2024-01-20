@@ -1,20 +1,18 @@
 package com.mang.medisinais.repositories;
 
 import com.mang.medisinais.domain.Profissional;
-import com.mang.medisinais.domain.dto.ResultadoDTO;
 import jakarta.annotation.Nullable;
+import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
-import java.util.List;
+public interface ProfissionalRepository extends JpaRepository<Profissional, Long>,
+    JpaSpecificationExecutor<Profissional> {
 
-public interface ProfissionalRepository extends JpaRepository<Profissional, Long>, JpaSpecificationExecutor<Profissional> {
+  List<Profissional> findAll(@Nullable Specification<Profissional> spec);
 
-    List<Profissional> findAll(@Nullable Specification<Profissional> spec);
+  Profissional findBySlug(String slug);
 
-    Profissional findBySlug(@Param(("slug")) String slug);
-
+  Profissional findByEmail(String email);
 }
