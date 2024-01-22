@@ -4,6 +4,7 @@ import com.mang.medisinais.dto.ExcecaoDTO;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -18,14 +19,10 @@ public class ExceptionHandlerController {
   }
 
   @ExceptionHandler(MediSinaisExcecao.class)
-  public String tratarExcecao(MediSinaisExcecao excecao) {
-    ExcecaoDTO excecaoDTO = new ExcecaoDTO(excecao.getMessage(),
-        HttpStatus.BAD_REQUEST.value());
+  public String tratarExcecao(MediSinaisExcecao excecao, Model model) {
+    model.addAttribute("erro", excecao.getMessage());
 
     return "erro";
   }
 
-  private void enviarErro(MediSinaisExcecao excecao, Model modelMap) {
-    modelMap.addAttribute("excecao", excecao);
-  }
 }

@@ -23,8 +23,7 @@ public class ProfissionalController {
   private final ProfissionalService profissionalService;
 
   @PostMapping("/cadastro")
-  public String cadastrarProfissional
-      (@RequestBody ProfissionalDTO dadosProfissional, ModelMap model) {
+  public String cadastrarProfissional(@RequestBody ProfissionalDTO dadosProfissional, ModelMap model) {
 
     ProfissionalDTO novoProfissional = profissionalService.criarProfissional(dadosProfissional);
     model.addAttribute("cadastrado", novoProfissional);
@@ -52,12 +51,8 @@ public class ProfissionalController {
   }
 
   @GetMapping("/profissional/{slug}")
-  public String paginaProfissional(@PathVariable String slug, ModelMap model) {
+  public String paginaProfissional(@PathVariable String slug, ModelMap model) throws MediSinaisExcecao {
     ResultadoDTO profissional = profissionalService.encontrarPorSlug(slug);
-
-    if (profissional == null) {
-      return "erro";
-    }
 
     model.addAttribute("profissional", profissional);
 

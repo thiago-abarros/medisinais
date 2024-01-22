@@ -20,8 +20,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProfissionalService {
 
-  private static final String EMAIL_PROFISSIONAL_NAO_ENCONTRADO = "O email fornecido, não foi encontrado, por favor forneça um email válido.";
-  private static final String SENHA_INCORRETA = "A senha fornecida está incorreta, verifique se foi digitada corretamente.";
+  private static final String EMAIL_PROFISSIONAL_NAO_ENCONTRADO = "Email não encontrado.";
+  private static final String SENHA_INCORRETA = "Senha incorreta.";
+  private static final String SLUG_NAO_ENCONTRADO = "Profissional não encontrado";
 
   private final ProfissionalRepository userRepo;
 
@@ -45,11 +46,11 @@ public class ProfissionalService {
         .and(ProfissionalSpecification.temPlanoSaude(plano)));
   }
 
-  public ResultadoDTO encontrarPorSlug(String slug) {
+  public ResultadoDTO encontrarPorSlug(String slug) throws MediSinaisExcecao {
     Profissional resultado = userRepo.findBySlug(slug);
 
     if (resultado == null) {
-      return null;
+      throw new MediSinaisExcecao(SLUG_NAO_ENCONTRADO);
     }
 
     return ResultadoDTO.fromProfissional(resultado);
@@ -57,6 +58,7 @@ public class ProfissionalService {
 
   public Profissional autenticarProfissional(LoginDTO dadosLogin) throws MediSinaisExcecao {
     Profissional profissional = this.userRepo.findByEmail(dadosLogin.email());
+
     if (profissional == null) {
       throw new MediSinaisExcecao(EMAIL_PROFISSIONAL_NAO_ENCONTRADO);
     }
