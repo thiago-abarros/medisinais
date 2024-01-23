@@ -3,7 +3,6 @@ package com.mang.medisinais.domain;
 import com.github.slugify.Slugify;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
 import com.mang.medisinais.dto.ProfissionalDTO;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -41,7 +40,7 @@ public class Profissional {
   private EspecialidadeProfissional especialidade;
 
   @Enumerated(EnumType.STRING)
-  @ManyToMany(mappedBy = "profissionais", cascade = CascadeType.ALL)
+  @ManyToMany()
   @Column(name = "planos_aceitos")
   private List<PlanoSaude> planosAceitos;
 
@@ -62,17 +61,15 @@ public class Profissional {
   @Column(name = "foto_usuario")
   private byte[] foto;
 
-  public Profissional(ProfissionalDTO profissionalDTO) {
+  public Profissional(ProfissionalDTO profissionalDTO, String senha, List<PlanoSaude> planos) {
     this.nome = profissionalDTO.nome();
     this.email = profissionalDTO.email();
     this.cpf = profissionalDTO.cpf();
     this.enderecos = profissionalDTO.enderecos();
     this.telefone = profissionalDTO.telefone();
-    if (profissionalDTO.planosAceitos() != null) {
-      this.planosAceitos = profissionalDTO.planosAceitos().stream().map(PlanoSaude::new).toList();
-    }
+    this.planosAceitos = planos;
     this.especialidade = profissionalDTO.especialidade();
-    this.senha = profissionalDTO.senha();
+    this.senha = senha;
     this.foto = profissionalDTO.foto();
     this.slug = Slugify.builder().build().slugify(profissionalDTO.nome());
   }

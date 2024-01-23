@@ -1,13 +1,7 @@
 package com.mang.medisinais.domain;
 
-import com.mang.medisinais.domain.enums.PlanoSaudeValido;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,11 +21,7 @@ public class PlanoSaude {
 
   private String nome;
 
-  @ManyToMany
+  @ManyToMany(mappedBy = "planosAceitos", cascade = CascadeType.ALL)
   private List<Profissional> profissionais;
-
-  public PlanoSaude(PlanoSaudeValido plano) {
-    this.nome = String.valueOf(plano);
-  }
 
 }
