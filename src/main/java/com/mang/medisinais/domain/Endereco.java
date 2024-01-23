@@ -1,11 +1,8 @@
 package com.mang.medisinais.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.mang.medisinais.domain.enums.UnidadeFederativa;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,24 +18,26 @@ public class Endereco {
   @Column(name = "id_endereco")
   private Long id;
 
+  @Column(nullable = false)
   private String rua;
 
+  @Column(nullable = false)
   private String bairro;
 
+  @Column(nullable = false)
+  @Size(min = 3, max = 40)
   private String cidade;
 
-  private String uf;
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false, length = 2)
+  @Size(min = 2, max = 2)
+  private UnidadeFederativa uf;
 
+  @Column(nullable = false, length = 8)
+  @Size(min = 8, max = 8)
   private String cep;
 
   @ManyToOne
   private Profissional profissional;
 
-  public Endereco(String rua, String bairro, String cidade, String uf, String cep) {
-    this.rua = rua;
-    this.bairro = bairro;
-    this.cidade = cidade;
-    this.uf = uf;
-    this.cep = cep;
-  }
 }

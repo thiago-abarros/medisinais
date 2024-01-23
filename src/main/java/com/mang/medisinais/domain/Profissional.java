@@ -14,6 +14,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.List;
+
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +32,7 @@ public class Profissional {
   @Column(name = "id_profissional")
   private Long id;
 
+  @Column(nullable = false)
   private String nome;
 
   @Column(unique = true)
@@ -44,18 +47,21 @@ public class Profissional {
   @Column(name = "planos_aceitos")
   private List<PlanoSaude> planosAceitos;
 
-  @Column(unique = true)
+  @Column(unique = true, nullable = false)
   private String email;
 
+  @Column(nullable = false)
   private String senha;
 
   @OneToMany(mappedBy = "profissional")
   private List<Endereco> enderecos;
 
-  @Column(unique = true)
+  @Column(unique = true, length = 11, nullable = false)
+  @Size(min = 11, max = 11)
   private String cpf;
 
-  @Column(unique = true)
+  @Column(unique = true, length = 11, nullable = false)
+  @Size(min = 11, max = 11)
   private String telefone;
 
   @Column(name = "foto_usuario")
