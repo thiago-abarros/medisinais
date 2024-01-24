@@ -1,0 +1,376 @@
+body {
+    position: relative;
+    padding-bottom: 500px;
+}
+
+/* header */
+
+header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #fff;
+    padding: 25px 30px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* logo */
+
+.logo {
+    margin-right: auto;
+
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* navbar */
+
+nav {
+    padding-right: 20px;
+}
+
+.navbar-links {
+    list-style: none;
+}
+
+.navbar-links li {
+    display: inline-block;
+    padding: 0px 34px;
+}
+
+.navbar-links li a {
+    transition: all 0.5s ease 0s;
+}
+
+.navbar-links li a:hover {
+    color: #217e9c;
+    border-bottom: 1px solid #217e9c;
+}
+
+/* header buttons */
+
+header button {
+    padding: 17px 30px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+}
+
+.head-btns {
+    display: flex;
+    gap: 16px;
+}
+
+.login-btn {
+    color: #3a4f39;
+    background-color: #fff;
+    border: 1px solid #3a4f39;
+    transition: all 0.8s ease 0s;
+}
+
+.login-btn:hover {
+    color: #fff;
+    background-color: rgba(33, 126, 156, 1);
+    border: none;
+}
+
+.register-btn {
+    background-color: rgba(33, 126, 156, 1);
+    color: #fff;
+    border: none;
+    transition: all 0.8s ease 0s;
+}
+
+.register-btn:hover {
+    color: #217e9c;
+    background-color: rgba(33, 126, 156, 0);
+    border: 1px solid #3a4f39;
+}
+
+/* banner section */
+
+/* search section */
+
+.search-box {
+    margin: 100px auto;
+    width: 934px;
+    height: 161px;
+    flex-shrink: 0;
+
+    border-radius: 15px;
+    background: #FFF;
+    box-shadow: -1px 0px 4px 0px rgba(0, 0, 0, 0.25), 1px 0px 4px 0px rgba(0, 0, 0, 0.25), 0px -1px 4px 0px rgba(0, 0, 0, 0.25), 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+}
+
+/* top search */
+
+.links {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.links li {
+    list-style: none;
+    display: inline-block;
+    padding: 25px 68px;
+}
+
+.links li a {
+    transition: all 0.5s ease 0s;
+}
+
+.links li a:hover {
+    color: #217e9c;
+    border-bottom: 1px solid #217e9c;
+}
+
+/* bottom search */
+
+.bottom-search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-bottom: 30px;
+    gap: 30px;
+    height: 91px;
+    width: 100%;
+}
+
+.bottom-search input {
+    width: 100%;
+    height: 60px;
+    padding: 1rem;
+    border-radius: 15px;
+    border: 2px solid rgba(0, 0, 0, 0.25);
+    background: rgba(250, 250, 250, 0.93);
+}
+
+.search-btn {
+    padding: 17px 50px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    background-color: rgba(33, 126, 156, 1);
+    color: #fff;
+    transition: all 0.8s ease 0s;
+}
+
+.search-btn:hover {
+    color: #217e9c;
+    background-color: rgba(33, 126, 156, 0);
+    border: 1px solid #3a4f39;
+}
+
+/* forms section */
+
+.wrapper-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wrapper {
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(33, 126, 156, 1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .5s ease, height .2s ease;
+}
+
+.wrapper.active-login,
+.wrapper.active-login.active {
+    transform: scale(1);
+}
+
+#close {
+    transform: scale(0);
+}
+
+.wrapper.active {
+    height: 520px;
+}
+
+.wrapper .forms-box {
+    width: 100%;
+    padding: 40px;
+
+}
+
+.wrapper .forms-box.login {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active .forms-box.login {
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .forms-box.register {
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .forms-box.register {
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #217e9c;
+    font-size: 2em;
+    color: #FFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.forms-box h2 {
+    font-size: 2em;
+    color: #217e9c;
+    text-align: center;
+}
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid #162938;
+    margin: 30px 0;
+}
+
+.input-box label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #162938;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label {
+    top: -5px;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162938;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: 0.9em;
+    color: #162938;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+}
+
+.remember-forgot a {
+    color: #162938;
+}
+
+.remember-forgot a:hover {
+    color: #162938;
+    text-decoration: underline;
+}
+
+.submit-btn {
+    width: 100%;
+    height: 45px;
+    background: #217e9c;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+}
+
+.login-register {
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a {
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-register p a:hover {
+    text-decoration: underline;
+}
+
+/* footer */
+
+footer {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    height: 60px;
+    background-color: #217e9c;
+}
+
+footer p {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px;
+    color: #fff;
+}
