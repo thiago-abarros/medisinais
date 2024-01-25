@@ -78,13 +78,13 @@ header button {
 .login-btn:hover {
     color: #fff;
     background-color: rgba(33, 126, 156, 1);
-    border: none;
+    border: 1px solid #fff;
 }
 
 .register-btn {
     background-color: rgba(33, 126, 156, 1);
     color: #fff;
-    border: none;
+    border: 1px solid rgba(33, 126, 156, 1);
     transition: all 0.8s ease 0s;
 }
 
