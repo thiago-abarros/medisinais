@@ -30,8 +30,8 @@ public class ProfissionalController {
   private final ProfissionalService profissionalService;
 
   @GetMapping("/")
-  public String exibirIndex() {
-    return "index";
+  public String exibirHome(LoginDTO login) {
+    return "home";
   }
 
   @PostMapping("/cadastro")
@@ -43,13 +43,8 @@ public class ProfissionalController {
     return "paginaCadastrado";
   }
 
-  @GetMapping("/login")
-  public String exibirPaginaLogin() {
-    return "login";
-  }
-
   @PostMapping("/login")
-  public String logarProfissional(@RequestBody LoginDTO login,HttpSession sessao) throws MediSinaisExcecao {
+  public String logarProfissional(LoginDTO login, HttpSession sessao) throws MediSinaisExcecao {
     Profissional profissionalLogado = profissionalService.autenticarProfissional(login);
 
     sessao.setAttribute("dadosProfissional", profissionalLogado);

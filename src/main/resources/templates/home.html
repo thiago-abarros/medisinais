@@ -8,16 +8,16 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
   />
-  <link rel="stylesheet" href="/static/css/global.css">
-  <link rel="stylesheet" href="/static/css/home.css">
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+  <link rel="stylesheet" th:href="@{/css/home.css}">
   <title>MediSinais</title>
 </head>
 <body>
 
 <header class="page-header">
   <div class="logo">
-    <img class="nav-img" src="/static/assets/icons8-vulcan-salute-48.png" alt="logo MediSinais">
-    <a href="#back-to-home">MediSinais</a>
+    <img class="nav-img" th:src="@{/assets/icons8-vulcan-salute-48.png}" alt="logo MediSinais">
+    <a href="#">MediSinais</a>
   </div>
   <nav>
     <ul class="navbar-links">
@@ -46,13 +46,13 @@
     <div class="top-search">
       <ul class="links">
         <li>
-          <a href="#medicos">Médicos</a>
+          <a href="/pesquisa?especialidade=medico">Médicos</a>
         </li>
         <li>
-          <a href="#psicologos">Psicólogos</a>
+          <a href="/pesquisa?especialidade=psicologo">Psicólogos</a>
         </li>
         <li>
-          <a href="#nutricionistas">Nutricionistas</a>
+          <a href="/pesquisa?especialidade=nutricionista">Nutricionistas</a>
         </li>
       </ul>
     </div>
@@ -70,15 +70,15 @@
 
       <div class="forms-box login">
         <h2>Login</h2>
-        <form action="#">
+        <form action="#" method="POST" th:action="@{/login}" th:object="${loginDTO}" >
           <div class="input-box">
             <span class="icon"><ion-icon name="mail"></ion-icon></span>
-            <input type="email" required>
+            <input type="email" required th:field="*{email}">
             <label>Email</label>
           </div>
           <div class="input-box">
             <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-            <input type="password" required>
+            <input type="password" required th:field="*{senha}">
             <label>Senha</label>
           </div>
           <div class="remember-forgot">
@@ -126,7 +126,7 @@
   <p>© 2023 MediSinais S.A. Todos os direitos reservados</p>
 </footer>
 
-<script src="/static/scripts/home.js"></script>
+<script type="text/javascript" th:src="@{/scripts/home.js}"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

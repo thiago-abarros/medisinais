@@ -20,7 +20,7 @@ public class AuthFilter implements Filter {
         HttpSession sessao = req.getSession(false);
 
         if(sessao == null) {
-            res.sendRedirect("/login");
+            res.getWriter().append("Acesso não autorizado.");
         } else {
             filterChain.doFilter(request, response);
         }
