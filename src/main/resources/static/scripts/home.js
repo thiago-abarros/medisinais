@@ -14,6 +14,7 @@ function toggleActiveClass() {
 loginPopup.addEventListener('click', ()=> {
     wrapper.id = '';
     wrapper.classList.add('active-login');
+    wrapper.classList.add('open');
 })
 
 registerLink.addEventListener('click', ()=> {
@@ -30,9 +31,11 @@ registerPopup.addEventListener('click', ()=> {
     wrapper.id = '';
     wrapper.classList.add('active-login');
     wrapper.classList.add('active');
+    wrapper.classList.add('open');
 })
 
 closeIcon.addEventListener('click', ()=> {
     wrapper.id = 'close';
+    wrapper.classList.remove('open');
     toggleActiveClass();
 })
