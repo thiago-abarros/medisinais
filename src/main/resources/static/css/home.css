@@ -157,7 +157,7 @@ header button {
 .search-btn {
     padding: 17px 50px;
     border-radius: 15px;
-    border: none;
+    border: 1px solid rgba(33, 126, 156, 1);
     cursor: pointer;
     background-color: rgba(33, 126, 156, 1);
     color: #fff;
