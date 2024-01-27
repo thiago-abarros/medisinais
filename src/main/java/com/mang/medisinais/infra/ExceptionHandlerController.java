@@ -3,7 +3,7 @@ package com.mang.medisinais.infra;
 import com.mang.medisinais.dto.ExcecaoDTO;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -18,10 +18,8 @@ public class ExceptionHandlerController {
   }
 
   @ExceptionHandler(MediSinaisExcecao.class)
-  public String tratarExcecao(MediSinaisExcecao excecao, Model model) {
-    model.addAttribute("erro", excecao.getMessage());
-
-    return "erro";
+  public ResponseEntity<String> tratarExcecao(MediSinaisExcecao excecao) {
+    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(excecao.getMessage());
   }
 
 }
