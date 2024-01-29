@@ -5,7 +5,7 @@
 
       axios.post('/login', formData)
         .then(function (response) {
-          window.location.href = '/home';
+          window.location.href = '/';
         })
         .catch(function (error) {
           const errorContainer = document.getElementById('errorContainer');

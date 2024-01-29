@@ -1,0 +1,44 @@
+<header class="page-header" th:fragment="navbar">
+    <div class="logo">
+        <img class="nav-img" th:src="@{/assets/icons8-vulcan-salute-48.png}" alt="logo MediSinais">
+        <a href="/">MediSinais</a>
+    </div>
+    <nav>
+        <ul class="navbar-links">
+            <li>
+                <a href="#servico">O serviço</a>
+            </li>
+            <li>
+                <a href="#funcionamento">Como funciona</a>
+            </li>
+            <li>
+                <a href="#contato">Contato</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="head-btns">
+        <a href="#">
+            <button class="login-btn">Login</button>
+        </a>
+        <a href="#">
+            <button class="register-btn">Cadastre-se</button>
+        </a>
+    </div>
+</header>
+
+<header class="page-header" th:fragment="navbarLogado">
+    <div class="logo">
+        <img class="nav-img" th:src="@{/assets/icons8-vulcan-salute-48.png}" alt="logo MediSinais">
+        <a href="/">MediSinais</a>
+    </div>
+    <nav>
+        <ul class="navbar-links">
+            <li>
+                <a href="/dados">Meus dados</a>
+            </li>
+            <li>
+                <a href="/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>

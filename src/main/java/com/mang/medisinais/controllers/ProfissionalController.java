@@ -32,7 +32,11 @@ public class ProfissionalController {
   private final ProfissionalService profissionalService;
 
   @GetMapping("/")
-  public String exibirHome(LoginDTO login) {
+  public String exibirHome(LoginDTO login, Model model, HttpServletRequest request) {
+    HttpSession sessao = request.getSession(false);
+
+    model.addAttribute("logado", sessao != null);
+
     return "home";
   }
 
