@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/listProfessionals.css}">
+    <title>MediSinais</title>
+</head>
+<body>
+    
+    <header class="page-header">
+        <div class="logo">
+            <img class="nav-img" th:src="@{/assets/icons8-vulcan-salute-48.png}" alt="logo MediSinais">
+            <a href="#back-to-home">MediSinais</a>
+        </div>
+        <nav>
+            <ul class="navbar-links">
+                <li>
+                    <a href="#evento">O serviço</a>
+                </li>
+                <li>
+                    <a href="#funcionamento">Como funciona</a>
+                </li>
+                <li>
+                    <a href="#contato">Contato</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="head-btns">
+            <a href="#">
+                <button class="login-btn">Login</button>
+            </a>
+            <a href="#">
+                <button class="register-btn">Cadastre-se</button>
+            </a>
+        </div>
+    </header>
+    <section>
+        <aside>
+            <h2>Filtros</h2>
+            <div class="sidebar location">
+                <label class="title">Localização</label>
+                <input type="text" id="city-input" placeholder="Digite a cidade">
+            </div>
+            <hr>
+            <div class="sidebar checkbox">
+                <label class="title">Tipo de profissional</label>
+                <label class="options"><input type="checkbox" id="psicologo">Psicólogo</label>
+                <label class="options"><input type="checkbox" id="medico">Médico</label>
+                <label class="options"><input type="checkbox" id="nutricionista">Nutricionista</label>
+            </div>
+            <hr>
+            <div class="sidebar checkbox">
+                <label class="title">Plano de Saúde</label>
+                <label class="options"><input type="checkbox" id="unimed">Unimed</label>
+                <label class="options"><input type="checkbox" id="bradesco">Bradesco</label>
+                <label class="options"><input type="checkbox" id="amil">Amil</label>
+                <label class="options"><input type="checkbox" id="sulamerica">SulAmérica</label>
+                <label class="options"><input type="checkbox" id="hapvida">Hapvida</label>
+            </div>
+            <hr>
+            <div class="sidebar">
+                <label class="title">Avaliação</label>
+            </div>
+            <hr>
+            <div class="sidebar clear">
+                <button class="clear-btn" id="clear-btn">Limpar</button>
+            </div>
+        </aside>
+        <main></main>
+    </section>
+
+</body>
+</html>
