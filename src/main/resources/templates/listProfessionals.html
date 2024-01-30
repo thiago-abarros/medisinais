@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font awesome Icon CDN -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
     <link rel="stylesheet" th:href="@{/css/global.css}">
     <link rel="stylesheet" th:href="@{/css/listProfessionals.css}">
     <title>MediSinais</title>
@@ -62,14 +67,81 @@
             <hr>
             <div class="sidebar">
                 <label class="title">Avaliação</label>
+                <label class="options"><input type="checkbox" id="1">
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+                <label class="options"><input type="checkbox" id="2">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+                <label class="options"><input type="checkbox" id="3">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+                <label class="options"><input type="checkbox" id="4">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
+                <label class="options"><input type="checkbox" id="5">
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline"></ion-icon>
+                </label>
             </div>
             <hr>
             <div class="sidebar clear">
                 <button class="clear-btn" id="clear-btn">Limpar</button>
             </div>
         </aside>
-        <main></main>
+        <main>
+            <h1>Profissionais encontrados:</h1>
+            <div class="professionals-box">
+                <div class="professional-box" id="box-1">
+                    <ul class="information">
+                        <li id="name">Isadora Luna</li>
+                        <li id="address">Rua Independência, 301, Renascer, Macapá-AP</li>
+                        <li id="insurance">Aceita plano de saúde</li>
+                        <li id="phone">(96) 2845-4768</li>
+                    </ul>
+                    <button class="more" id="more">Ver mais</button>
+                </div>
+                <div class="professional-box" id="box-2">
+                    <ul class="information">
+                        <li id="name">Isadora Luna</li>
+                        <li id="address">Rua Independência, 301, Renascer, Macapá-AP</li>
+                        <li id="insurance">Aceita plano de saúde</li>
+                        <li id="phone">(96) 2845-4768</li>
+                    </ul>
+                    <button class="more" id="more">Ver mais</button>
+                </div>
+                <div class="professional-box" id="box-3">
+                    <ul class="information">
+                        <li id="name">Isadora Luna</li>
+                        <li id="address">Rua Independência, 301, Renascer, Macapá-AP</li>
+                        <li id="insurance">Aceita plano de saúde</li>
+                        <li id="phone">(96) 2845-4768</li>
+                    </ul>
+                    <button class="more" id="more">Ver mais</button>
+                </div>
+                <div class="professional-box" id="box-4">
+                    <ul class="information">
+                        <li id="name">Isadora Luna</li>
+                        <li id="address">Rua Independência, 301, Renascer, Macapá-AP</li>
+                        <li id="insurance">Aceita plano de saúde</li>
+                        <li id="phone">(96) 2845-4768</li>
+                    </ul>
+                    <button class="more" id="more">Ver mais</button>
+                </div>
+            </div>
+        </main>
     </section>
 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
