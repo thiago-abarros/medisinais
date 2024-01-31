@@ -26,7 +26,7 @@ public class ProfissionalSpecification {
 
   public static Specification<Profissional> temPlanoSaude(PlanoSaudeValido planoSaude) {
     return ((root, query, cb) -> planoSaude == null ? cb.conjunction() :
-        cb.equal(root.join("planosAceitos", JoinType.INNER).get("nome"), planoSaude.getNome()));
+        cb.equal(root.join("planosAceitos", JoinType.INNER).get("nome"), planoSaude));
   }
 
 }

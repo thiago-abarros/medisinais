@@ -139,7 +139,7 @@ hr {
     padding-left: 60px;
 }
 
-#city-input {
+#cidade {
     width: 90%;
     height: 44px;
     padding: 1rem;
@@ -232,10 +232,10 @@ main {
 main h1 {
     color: #000;
     font-family: Inter;
-    font-size: 48px;
+    font-size: 40px;
     font-weight: 500;
 
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding-top: 40px;
 }
 

@@ -2,34 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Font awesome Icon CDN -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/listaProfissionais.css}">
+    <title>MediSinais</title>
 </head>
 <body>
+    <header class="page-header" th:replace="fragments/navbar :: ${logado} ? 'navbarLogado' : 'navbar'"></header>
+    <!-- Nav bar -->
+    <section>
+        <aside>
+            <h2>Filtros</h2>
+            <form action="/pesquisa" method="GET">
+                <div class="sidebar location">
+                    <label class="title">Localização</label>
+                    <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" onchange="this.form.submit();">
+                </div>
+                <hr>
+                <div class="sidebar checkbox" id="especialidade">
+                    <label class="title">Tipo de profissional</label>
+                    <label class="options"><input type="checkbox" name="especialidade" value="psicologo" onchange="this.form.submit();">Psicólogo</label>
+                    <label class="options"><input type="checkbox" name="especialidade" value="medico" onchange="this.form.submit();">Médico</label>
+                    <label class="options"><input type="checkbox" name="especialidade" value="nutricionista" onchange="this.form.submit();">Nutricionista</label>
+                </div>
+                <hr>
+                <div class="sidebar checkbox" id="planosSaude">
+                    <label class="title">Plano de Saúde</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="Unimed" onchange="this.form.submit();">Unimed</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="Bradesco" onchange="this.form.submit();">Bradesco</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="Amil" onchange="this.form.submit();">Amil</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="sulamerica" onchange="this.form.submit();">SulAmérica</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="hapvida" onchange="this.form.submit();">Hapvida</label>
+                </div>
+                <hr>
+                <div class="sidebar">
+                    <label class="title">Avaliação</label>
+                    <label class="options"><input type="checkbox" id="1">
+                        <ion-icon name="star-outline"></ion-icon>
+                    </label>
+                    <label class="options"><input type="checkbox" id="2">
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </label>
+                    <label class="options"><input type="checkbox" id="3">
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </label>
+                    <label class="options"><input type="checkbox" id="4">
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </label>
+                    <label class="options"><input type="checkbox" id="5">
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                        <ion-icon name="star-outline"></ion-icon>
+                    </label>
+                </div>
+            </form>
+            <hr>
+            <div class="sidebar clear">
+                <form action="/pesquisa" method="GET">
+                    <button class="clear-btn" id="clear-btn" type="submit">Limpar</button>
+                </form>
+            </div>
+        </aside>
+        <main>
+            <h1>Profissionais encontrados:</h1>
 
-    <div th:each="profissional : ${profissionais}">
+            <div class="professionals-box" th:each="profissional : ${profissionais}">
+                <div class="professional-box" id="box-1">
+                    <ul class="information">
+                        <li id="nome" th:text="${profissional.nome}"></li>
+                        <div th:each="endereco : ${profissional.enderecos}">
+                            <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
+                        </div>
+                        <li id="planos">Aceita plano de saúde:</li>
+                        <div th:each="plano : ${profissional.planosAceitos}">
+                            <li id="plano" th:text="${plano.nome}"></li>
+                        </div>
+                        <li id="telefone" th:text="${profissional.telefone}"></li>
+                    </ul>
+                    <button class="more" id="more">Ver mais</button>
+                </div>
+            </div>
+        </main>
+    </section>
 
-        <table style="width:100%">
-            <tr>
-                <th>Nome</th>
-                <th>Especialidade</th>
-                <th>Endereço</th>
-                <th>Telefone</th>
-                <th>Planos de Saúde Aceitos</th>
-            </tr>
-            <tr>
-                <td th:text="${profissional.nome}"></td>
-                <td th:text="${profissional.especialidade}"></td>
-                <td th:each="endereco : ${profissional.enderecos}">
-                    <p th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></p>
-                </td>
-                <td th:text="${profissional.telefone}"></td>
-                <td th:each="plano : ${profissional.planosAceitos}">
-                    <p th:text="${plano.nome}"></p>
-                </td>
-            </tr>
-        </table>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        function marcarCheckbox(valores, idDiv) {
+            var checkboxes = document.querySelectorAll("#" + idDiv + " input[type='checkbox']");
 
-    </div>
+            checkboxes.forEach(function(checkbox) {
+                if(valores.includes(checkbox.value)) {
+                    checkbox.checked = true;
+                }
+            });
+        }
 
+        var planos = '[[${filtros.planoSaude}]]';
+        var especialidade = '[[${filtros.especialidade}]]';
+
+        marcarCheckbox(planos, "planosSaude");
+        marcarCheckbox(especialidade, "especialidade");
+    </script>
 </body>
 </html>

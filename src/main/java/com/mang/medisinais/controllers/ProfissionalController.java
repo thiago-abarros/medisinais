@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,7 +40,8 @@ public class ProfissionalController {
   }
 
   @PostMapping("/cadastro")
-  public String cadastrarProfissional(@RequestBody ProfissionalDTO dadosProfissional, ModelMap model) {
+  public String cadastrarProfissional(@RequestBody ProfissionalDTO dadosProfissional, Model
+          model) {
     ProfissionalDTO novoProfissional = profissionalService.criarProfissional(dadosProfissional);
 
     model.addAttribute("cadastrado", novoProfissional);
@@ -68,16 +68,19 @@ public class ProfissionalController {
   }
 
   @GetMapping("/pesquisa")
-  public String exibirOesquisaProfissionais(FiltroDTO filtroDTO, ModelMap model) {
+  public String exibirOesquisaProfissionais(FiltroDTO filtroDTO, Model model, HttpServletRequest request) {
     List<Profissional> profissionais = profissionalService.pesquisaProfissionais(filtroDTO);
+    HttpSession sessao = request.getSession(false);
 
+    model.addAttribute("logado", sessao != null);
     model.addAttribute("profissionais", profissionais);
+    model.addAttribute("filtros", filtroDTO);
 
     return "listaProfissionais";
   }
 
   @GetMapping("/profissional/{slug}")
-  public String exibirPaginaProfissional(@PathVariable String slug, ModelMap model) throws MediSinaisExcecao {
+  public String exibirPaginaProfissional(@PathVariable String slug, Model model) throws MediSinaisExcecao {
     ResultadoDTO profissional = profissionalService.encontrarPorSlug(slug);
 
     model.addAttribute("profissional", profissional);

@@ -1,5 +1,6 @@
 package com.mang.medisinais.domain;
 
+import com.mang.medisinais.domain.enums.PlanoSaudeValido;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -19,7 +20,8 @@ public class PlanoSaude {
   @Column(name = "id_plano_saude")
   private Long id;
 
-  private String nome;
+  @Enumerated(EnumType.STRING)
+  private PlanoSaudeValido nome;
 
   @ManyToMany(mappedBy = "planosAceitos", cascade = CascadeType.ALL)
   private List<Profissional> profissionais;

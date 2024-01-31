@@ -9,9 +9,9 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public enum PlanoSaudeValido {
 
-  BRADESCO("Bradesco Saúde", "bradesco", 3L),
-  UNIMED("Unimed", "unimed", 1L),
-  AMIL("Amil", "amil", 2L);
+  BRADESCO("Bradesco Saúde", "Bradesco", 3L),
+  UNIMED("Unimed", "Unimed", 1L),
+  AMIL("Amil", "Amil", 2L);
 
   private final String nome;
   private final String slug;
