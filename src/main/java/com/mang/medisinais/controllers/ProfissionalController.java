@@ -68,7 +68,7 @@ public class ProfissionalController {
   }
 
   @GetMapping("/pesquisa")
-  public String exibirOesquisaProfissionais(FiltroDTO filtroDTO, Model model, HttpServletRequest request) {
+  public String exibirPesquisaProfissionais(FiltroDTO filtroDTO, Model model, HttpServletRequest request) {
     List<Profissional> profissionais = profissionalService.pesquisaProfissionais(filtroDTO);
     HttpSession sessao = request.getSession(false);
 
@@ -79,10 +79,13 @@ public class ProfissionalController {
   }
 
   @GetMapping("/profissional/{slug}")
-  public String exibirPaginaProfissional(@PathVariable String slug, Model model) throws MediSinaisExcecao {
+  public String exibirPaginaProfissional(@PathVariable String slug, Model model,
+                                         HttpServletRequest request) throws MediSinaisExcecao {
     ResultadoDTO profissional = profissionalService.encontrarPorSlug(slug);
+    HttpSession sessao = request.getSession(false);
 
     model.addAttribute("profissional", profissional);
+    model.addAttribute("logado", sessao != null);
 
     return "paginaProfissional";
   }

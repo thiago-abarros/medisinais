@@ -92,7 +92,9 @@
                         </div>
                         <li id="telefone" th:text="${profissional.telefone}"></li>
                     </ul>
-                    <button class="more" id="more">Ver mais</button>
+                    <a th:href="'/profissional/' + ${profissional.slug}">
+                        <button class="more" id="more">Ver mais</button>
+                    </a>
                 </div>
             </div>
         </main>
