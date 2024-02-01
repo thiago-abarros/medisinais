@@ -13,7 +13,7 @@
     <title>MediSinais</title>
 </head>
 <body>
-    <header class="page-header" th:replace="fragments/navbar :: ${logado} ? 'navbarLogado' : 'navbar'"></header>
+    <header class="page-header" th:replace="~{fragments/navbar :: ${logado} ? 'navbarLogado' : 'navbar'}"></header>
     <!-- Nav bar -->
     <section>
         <aside>
@@ -21,7 +21,7 @@
             <form action="/pesquisa" method="GET">
                 <div class="sidebar location">
                     <label class="title">Localização</label>
-                    <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade" onchange="this.form.submit();">
+                    <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade">
                 </div>
                 <hr>
                 <div class="sidebar checkbox" id="especialidade">
@@ -100,22 +100,6 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script>
-        function marcarCheckbox(valores, idDiv) {
-            var checkboxes = document.querySelectorAll("#" + idDiv + " input[type='checkbox']");
-
-            checkboxes.forEach(function(checkbox) {
-                if(valores.includes(checkbox.value)) {
-                    checkbox.checked = true;
-                }
-            });
-        }
-
-        var planos = '[[${filtros.planoSaude}]]';
-        var especialidade = '[[${filtros.especialidade}]]';
-
-        marcarCheckbox(planos, "planosSaude");
-        marcarCheckbox(especialidade, "especialidade");
-    </script>
+    <script type="text/javascript" th:src="@{/scripts/filtros.js}"></script>
 </body>
 </html>

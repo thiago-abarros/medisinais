@@ -74,7 +74,6 @@ public class ProfissionalController {
 
     model.addAttribute("logado", sessao != null);
     model.addAttribute("profissionais", profissionais);
-    model.addAttribute("filtros", filtroDTO);
 
     return "listaProfissionais";
   }

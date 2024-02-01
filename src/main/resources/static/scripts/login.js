@@ -1,5 +1,5 @@
   document.getElementById('loginForm').addEventListener('submit', (event) => {
-      event.preventDefault(); // Impede o envio do formulário padrão
+      event.preventDefault();
 
       const formData = new FormData(event.target);
 
@@ -8,8 +8,8 @@
           window.location.href = '/';
         })
         .catch(function (error) {
-          const errorContainer = document.getElementById('errorContainer');
-          errorContainer.textContent = error.response.data;
-          errorContainer.style.display = 'block';
+          const msgErro = document.getElementById('msgErro');
+          msgErro.textContent = error.response.data;
+          msgErro.style.display = 'block';
         });
   });

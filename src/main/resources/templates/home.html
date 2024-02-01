@@ -11,7 +11,7 @@
     <title>MediSinais</title>
   </head>
   <body>
-    <header class="page-header" th:replace="fragments/navbar :: ${logado} ? 'navbarLogado' : 'navbar'"></header>
+    <header class="page-header" th:replace="~{fragments/navbar :: ${logado} ? 'navbarLogado' : 'navbar'}"></header>
     <!-- Nav bar -->
     <main>
       <section class="search-box">
@@ -61,7 +61,7 @@
               <div class="login-register">
                 <p>Não possui uma conta? <a href="#" class="register-link">Registre-se</a></p>
               </div>
-              <div id="errorContainer" style="display: none; color: red;"></div>
+              <div id="msgErro" style="display: none; color: red;"></div>
             </form>
           </div>
 
