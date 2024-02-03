@@ -4,10 +4,7 @@ import com.mang.medisinais.domain.PlanoSaude;
 import com.mang.medisinais.domain.Profissional;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
 import com.mang.medisinais.domain.enums.PlanoSaudeValido;
-import com.mang.medisinais.dto.FiltroDTO;
-import com.mang.medisinais.dto.LoginDTO;
-import com.mang.medisinais.dto.ProfissionalDTO;
-import com.mang.medisinais.dto.ResultadoDTO;
+import com.mang.medisinais.dto.*;
 import com.mang.medisinais.infra.MediSinaisExcecao;
 import com.mang.medisinais.repositories.EnderecoRepository;
 import com.mang.medisinais.repositories.PlanoSaudeRepository;
@@ -15,6 +12,8 @@ import com.mang.medisinais.repositories.ProfissionalRepository;
 import com.mang.medisinais.specifications.ProfissionalSpecification;
 
 import java.util.List;
+import java.util.Map;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -32,25 +31,27 @@ public class ProfissionalService {
   private final ProfissionalRepository userRepo;
   private final EnderecoRepository enderecoRepo;
   private final PlanoSaudeRepository planoRepo;
+  private final ValidadorService validador;
 
-  public ProfissionalDTO criarProfissional(ProfissionalDTO dados) {
+  public ResultadoCadastroDTO criarProfissional(CadastroDTO dados) {
+    Map<String, String> mensagens = validador.validarProfissional(dados);
 
-    if (Boolean.TRUE.equals(validarCadastro(dados))) {
-      String senhaHash = bcrypt.encode(dados.senha());
-      List<Long> ids = dados.planosAceitos().stream().map(PlanoSaudeValido::getId).toList();
-      List<PlanoSaude> planos = planoRepo.findAllById(ids);
-
-      Profissional novoProfissional = new Profissional(dados, senhaHash, planos);
-
-      this.userRepo.save(novoProfissional);
-
-      novoProfissional.getEnderecos().forEach(endereco -> {
-        endereco.setProfissional(novoProfissional);
-        enderecoRepo.save(endereco);
-      });
+    if(!mensagens.isEmpty()) {
+      return new ResultadoCadastroDTO(false, mensagens);
     }
 
-    return dados;
+    String senhaHash = bcrypt.encode(dados.senha());
+    List<Long> ids = dados.planosAceitos().stream().map(PlanoSaudeValido::getId).toList();
+    List<PlanoSaude> planos = planoRepo.findAllById(ids);
+
+    Profissional novoProfissional = new Profissional(dados, senhaHash, planos);
+
+    this.userRepo.save(novoProfissional);
+
+    dados.endereco().setProfissional(novoProfissional);
+    enderecoRepo.save(dados.endereco());
+
+    return new ResultadoCadastroDTO(true, mensagens);
   }
 
   public List<Profissional> pesquisaProfissionais(FiltroDTO filtro) {
@@ -73,22 +74,17 @@ public class ProfissionalService {
     return ResultadoDTO.fromProfissional(resultado);
   }
 
-  public Profissional autenticarProfissional(LoginDTO dadosLogin) throws MediSinaisExcecao {
+  public OperacaoDTO autenticarProfissional(LoginDTO dadosLogin) {
     Profissional profissional = this.userRepo.findByEmail(dadosLogin.email());
 
     if (profissional == null) {
-      throw new MediSinaisExcecao(EMAIL_PROFISSIONAL_NAO_ENCONTRADO);
+      return new OperacaoDTO(false, EMAIL_PROFISSIONAL_NAO_ENCONTRADO, null);
     }
     if (!bcrypt.matches(dadosLogin.senha(), profissional.getSenha())) {
-      throw new MediSinaisExcecao(SENHA_INCORRETA);
+      return new OperacaoDTO(false, SENHA_INCORRETA, null);
     }
 
-    return profissional;
-  }
-
-  private Boolean validarCadastro(ProfissionalDTO dados) {
-    return !(dados.nome().isEmpty() || dados.cpf().isEmpty() || dados.email().isEmpty()
-        || dados.telefone().isEmpty() || dados.especialidade() == null);
+    return new OperacaoDTO(true, "OK", profissional.getId());
   }
 
 }

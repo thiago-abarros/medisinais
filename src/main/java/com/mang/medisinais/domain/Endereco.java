@@ -32,7 +32,6 @@ public class Endereco {
   @Size(min = 3, max = 40)
   private String cidade;
 
-  @NotEmpty(message = "Por favor, preencha o campo de UF")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false, length = 2)
   @Size(min = 2, max = 2)

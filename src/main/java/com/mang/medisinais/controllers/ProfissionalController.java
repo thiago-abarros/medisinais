@@ -1,15 +1,13 @@
 package com.mang.medisinais.controllers;
 
 import com.mang.medisinais.domain.Profissional;
-import com.mang.medisinais.dto.FiltroDTO;
-import com.mang.medisinais.dto.LoginDTO;
-import com.mang.medisinais.dto.ProfissionalDTO;
-import com.mang.medisinais.dto.ResultadoDTO;
+import com.mang.medisinais.dto.*;
 import com.mang.medisinais.infra.MediSinaisExcecao;
 import com.mang.medisinais.services.ProfissionalService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,10 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -31,7 +26,7 @@ public class ProfissionalController {
   private final ProfissionalService profissionalService;
 
   @GetMapping("/")
-  public String exibirHome(LoginDTO login, Model model, HttpServletRequest request) {
+  public String exibirHome(HttpServletRequest request, Model model) {
     HttpSession sessao = request.getSession(false);
 
     model.addAttribute("logado", sessao != null);
@@ -39,21 +34,33 @@ public class ProfissionalController {
     return "home";
   }
 
+  @GetMapping("/cadastro")
+  public String exibirPaginaCadastro() {
+    return "cadastro";
+  }
+
   @PostMapping("/cadastro")
-  public String cadastrarProfissional(@RequestBody ProfissionalDTO dadosProfissional, Model
-          model) {
-    ProfissionalDTO novoProfissional = profissionalService.criarProfissional(dadosProfissional);
+  public ResponseEntity<Map<String, String>> cadastrarProfissional(CadastroDTO dadosProfissional) {
+    ResultadoCadastroDTO resultadoCadastroDTO = profissionalService.criarProfissional(dadosProfissional);
 
-    model.addAttribute("cadastrado", novoProfissional);
+    if(!resultadoCadastroDTO.status()) {
+      System.out.println(resultadoCadastroDTO.mensagens());
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoCadastroDTO.mensagens());
+    }
 
-    return "paginaCadastrado";
+    return ResponseEntity.status(HttpStatus.OK).build();
   }
 
   @PostMapping("/login")
-  public ResponseEntity<String> logarProfissional(LoginDTO login, HttpSession sessao) throws MediSinaisExcecao {
-    Profissional profissionalLogado = profissionalService.autenticarProfissional(login);
+  public ResponseEntity<String> logarProfissional(LoginDTO login, HttpServletRequest request) throws MediSinaisExcecao {
+    OperacaoDTO resultadoLogin = profissionalService.autenticarProfissional(login);
 
-    sessao.setAttribute("dadosProfissional", profissionalLogado);
+    if(!resultadoLogin.status()) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoLogin.mensagem());
+    }
+
+    HttpSession sessao = request.getSession(true);
+    sessao.setAttribute("idProfissional", resultadoLogin.idProfissional());
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }

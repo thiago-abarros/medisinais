@@ -15,4 +15,6 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Long
   Profissional findBySlug(String slug);
 
   Profissional findByEmail(String email);
+
+  Profissional findByCpf(String cpf);
 }

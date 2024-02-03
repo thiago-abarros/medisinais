@@ -1,6 +1,5 @@
 package com.mang.medisinais.infra;
 
-import com.mang.medisinais.dto.ExcecaoDTO;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlerController {
 
   @ExceptionHandler(DataIntegrityViolationException.class)
-  public String tratarEntradaDuplicada(DataIntegrityViolationException exception) {
-    ExcecaoDTO exceptionDTO = new ExcecaoDTO("Usuário já cadastrado",
-        HttpStatus.BAD_REQUEST.value());
-    return exceptionDTO.mensagem();
+  public void tratarEntradaDuplicada(DataIntegrityViolationException exception) {
+//    OperacaoDTO exceptionDTO = new OperacaoDTO("Usuário já cadastrado",
+//        HttpStatus.BAD_REQUEST.value());
+
+    exception.printStackTrace();
+
+//    return exceptionDTO.mensagem();
   }
 
   @ExceptionHandler(MediSinaisExcecao.class)
