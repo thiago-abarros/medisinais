@@ -17,3 +17,8 @@ h1, h2, h3, p, li, a, button {
     color: #000;
     text-decoration: none;
 }
+
+.msgErro{
+    display: none;
+    color: red;
+}

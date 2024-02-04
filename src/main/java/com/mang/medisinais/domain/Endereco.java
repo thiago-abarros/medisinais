@@ -53,7 +53,7 @@ public class Endereco {
     this.bairro = enderecoDTO.bairro();
     this.cidade = enderecoDTO.cidade();
     this.uf = enderecoDTO.uf();
-    this.cep = enderecoDTO.cep();
+    this.cep = Integer.parseInt(enderecoDTO.cep());
     this.profissional = profissional;
   }
 }

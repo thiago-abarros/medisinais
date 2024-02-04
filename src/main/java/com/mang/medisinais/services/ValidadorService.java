@@ -1,11 +1,10 @@
 package com.mang.medisinais.services;
 
+import com.mang.medisinais.dto.CadastroEnderecoDTO;
 import com.mang.medisinais.dto.CadastroProfissionalDTO;
 import com.mang.medisinais.repositories.ProfissionalRepository;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -17,19 +16,16 @@ import org.springframework.stereotype.Service;
 public class ValidadorService {
 
   private final ProfissionalRepository userRepo;
+  private final Validator validator;
 
   public Map<String, String> validarProfissional(CadastroProfissionalDTO profissional) {
-    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-    Validator validator = factory.getValidator();
-
-    Set<ConstraintViolation<CadastroProfissionalDTO>> violacoes = validator.validate(profissional);
-
     Map<String, String> mensagens = new HashMap<>();
-    for (ConstraintViolation<CadastroProfissionalDTO> violacao : violacoes) {
-      String origem = violacao.getPropertyPath().toString();
-      String message = violacao.getMessage();
-      mensagens.put(origem, message);
-    }
+
+    Set<ConstraintViolation<CadastroProfissionalDTO>> violacoesProfissional = validator.validate(profissional);
+    Set<ConstraintViolation<CadastroEnderecoDTO>> violacoesEndereco = validator.validate(profissional.endereco());
+
+    mensagens.putAll(pegarViolacao(violacoesProfissional));
+    mensagens.putAll(pegarViolacao(violacoesEndereco));
 
     if (userRepo.findByEmail(profissional.email()) != null) {
       mensagens.put("email", "Email já cadastrado.");
@@ -40,6 +36,18 @@ public class ValidadorService {
     if (userRepo.findByTelefone(profissional.telefone()) != null) {
       mensagens.put("telefone", "Telefone já cadastrado");
     }
+
+    return mensagens;
+  }
+
+  public Map<String, String> pegarViolacao(Set<? extends ConstraintViolation<?>> violacoes) {
+    Map<String, String> mensagens = new HashMap<>();
+
+    violacoes.forEach(violacao -> {
+      String origem = violacao.getPropertyPath().toString();
+      String message = violacao.getMessage();
+      mensagens.put(origem, message);
+    });
 
     return mensagens;
   }

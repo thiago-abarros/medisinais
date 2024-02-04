@@ -53,8 +53,6 @@ public class ProfissionalController {
     ResultadoCadastroDTO resultadoCadastroDTO = profissionalService.criarProfissional(
         dadosProfissional);
 
-    System.out.println(resultadoCadastroDTO.mensagens());
-
     if (!resultadoCadastroDTO.status()) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoCadastroDTO.mensagens());
     }
