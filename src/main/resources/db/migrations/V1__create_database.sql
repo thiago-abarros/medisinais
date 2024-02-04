@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS public.profissional
 (
-    id_profissional bigint NOT NULL,
+    id_profissional uuid NOT NULL,
     cpf character varying(11) COLLATE pg_catalog."default" NOT NULL,
     email character varying(255) COLLATE pg_catalog."default" NOT NULL,
     especialidade character varying(255) COLLATE pg_catalog."default" NOT NULL,
@@ -19,13 +19,13 @@ CREATE TABLE IF NOT EXISTS public.profissional
 
 CREATE TABLE IF NOT EXISTS public.endereco
 (
-    id_endereco bigint NOT NULL,
+    id_endereco uuid NOT NULL,
     bairro character varying(255) COLLATE pg_catalog."default" NOT NULL,
     cep integer NOT NULL,
     cidade character varying(40) COLLATE pg_catalog."default" NOT NULL,
     rua character varying(255) COLLATE pg_catalog."default" NOT NULL,
     uf character varying(2) COLLATE pg_catalog."default" NOT NULL,
-    profissional_id_profissional bigint,
+    profissional_id_profissional uuid,
     CONSTRAINT endereco_pkey PRIMARY KEY (id_endereco),
     CONSTRAINT fknxd94kr2j9k3dwu4eh5ha90v1 FOREIGN KEY (profissional_id_profissional)
         REFERENCES public.profissional (id_profissional) MATCH SIMPLE
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS public.plano_saude
 
 CREATE TABLE IF NOT EXISTS public.profissional_planos_aceitos
 (
-    profissionais_id_profissional bigint NOT NULL,
+    profissionais_id_profissional uuid NOT NULL,
     planos_aceitos_id_plano_saude bigint NOT NULL,
     CONSTRAINT fkntce0al144j2u7xpwbpyfii8p FOREIGN KEY (planos_aceitos_id_plano_saude)
         REFERENCES public.plano_saude (id_plano_saude) MATCH SIMPLE

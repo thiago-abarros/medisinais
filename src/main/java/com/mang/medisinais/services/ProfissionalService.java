@@ -20,6 +20,8 @@ import com.mang.medisinais.specifications.ProfissionalSpecification;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -59,7 +61,7 @@ public class ProfissionalService {
     return new ResultadoCadastroDTO(true, mensagens);
   }
 
-  public OperacaoDTO alterarProfissional(Long idProfissional, AtualizarProfissionalDTO dados)
+  public OperacaoDTO alterarProfissional(UUID idProfissional, AtualizarProfissionalDTO dados)
       throws MediSinaisExcecao {
     // TODO Validação
 
@@ -99,7 +101,7 @@ public class ProfissionalService {
     return ResultadoDTO.fromProfissional(resultado);
   }
 
-  public Profissional encontrarProfissionalPorId(Long id) throws MediSinaisExcecao {
+  public Profissional encontrarProfissionalPorId(UUID id) throws MediSinaisExcecao {
     Optional<Profissional> resultado = userRepo.findById(id);
 
     if (resultado.isEmpty()) {

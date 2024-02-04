@@ -1,5 +1,7 @@
 package com.mang.medisinais.dto;
 
-public record OperacaoDTO(boolean status, String mensagem, Long idProfissional) {
+import java.util.UUID;
+
+public record OperacaoDTO(boolean status, String mensagem, UUID idProfissional) {
 
 }

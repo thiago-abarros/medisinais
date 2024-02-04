@@ -16,6 +16,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,6 +53,8 @@ public class ProfissionalController {
     ResultadoCadastroDTO resultadoCadastroDTO = profissionalService.criarProfissional(
         dadosProfissional);
 
+    System.out.println(resultadoCadastroDTO.mensagens());
+
     if (!resultadoCadastroDTO.status()) {
       return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoCadastroDTO.mensagens());
     }
@@ -77,7 +81,7 @@ public class ProfissionalController {
       AtualizarProfissionalDTO dadosProfissional, HttpServletRequest request)
       throws MediSinaisExcecao {
 
-    Long idProfissional = (Long) sessao.getAttribute("idProfissional");
+    UUID idProfissional = (UUID) sessao.getAttribute("idProfissional");
     OperacaoDTO resultadoAlteracao = profissionalService.alterarProfissional(idProfissional,
         dadosProfissional);
 

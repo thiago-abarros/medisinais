@@ -15,6 +15,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import java.util.List;
+import java.util.UUID;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,7 +31,7 @@ public class Profissional {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id_profissional")
-  private Long id;
+  private UUID id;
 
   @Column(nullable = false)
   private String nome;

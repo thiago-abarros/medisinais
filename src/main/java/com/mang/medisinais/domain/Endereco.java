@@ -15,6 +15,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,7 +26,7 @@ public class Endereco {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "id_endereco")
-  private Long id;
+  private UUID id;
 
   @Column(nullable = false)
   private String rua;
