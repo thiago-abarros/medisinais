@@ -146,6 +146,14 @@ main {
     margin-left: 40px;
 }
 
+.endereco {
+    padding-bottom: 10px;
+}
+
+.endereco li {
+    list-style: none;
+}
+
 .information-container h2 {
     padding-bottom: 30px;
     font-family: Inter;
@@ -163,6 +171,10 @@ main {
 
 .information-container ul {
     padding-left: 220px;
+}
+
+.information-container ul li {
+    padding-bottom: 30px;
     margin-top: -30px;
 }
 

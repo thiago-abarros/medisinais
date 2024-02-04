@@ -28,7 +28,7 @@
                 </div>
                 <div class="information-container">
                     <h2 th:text="${profissional.nome}"></h2>
-                    <div th:each="endereco : ${profissional.enderecos}">
+                    <div class="endereco" th:each="endereco : ${profissional.enderecos}">
                         <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
                     </div>
                     <p th:text="${profissional.telefone}">
