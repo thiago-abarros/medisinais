@@ -86,10 +86,7 @@
                         <div th:each="endereco : ${profissional.enderecos}">
                             <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
                         </div>
-                        <li id="planos">Aceita plano de saúde:</li>
-                        <div th:each="plano : ${profissional.planosAceitos}">
-                            <li id="plano" th:text="${plano.nome}"></li>
-                        </div>
+                        <li id="planos">Aceita plano de saúde</li>
                         <li id="telefone">
                             <span th:text="'(' + ${#strings.substring(profissional.telefone, 0, 2)} + ') '"></span>
                             <span th:text="${#strings.substring(profissional.telefone, 2, 7)}"></span>

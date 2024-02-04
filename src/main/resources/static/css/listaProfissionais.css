@@ -266,6 +266,15 @@ main h1 {
     display: flex;
     margin-bottom: 10px;
     align-items: flex-start;
+    font-size: 16px;
+}
+
+#nome {
+    font-size: large;
+}
+
+#telefone {
+    margin-bottom: 0;
 }
 
 .more-btn {
