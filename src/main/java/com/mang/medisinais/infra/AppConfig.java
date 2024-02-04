@@ -10,18 +10,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 public class AppConfig {
 
-    @Bean
-    public BCryptPasswordEncoder bCryptPasswordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+  @Bean
+  public BCryptPasswordEncoder bCryptPasswordEncoder() {
+    return new BCryptPasswordEncoder();
+  }
 
-    @Bean
-    public FilterRegistrationBean<Filter> authFilter() {
-        FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new AuthFilter());
-        registrationBean.addUrlPatterns("/home/*");
-        registrationBean.addUrlPatterns("/logout");
-        return registrationBean;
-    }
+  @Bean
+  public FilterRegistrationBean<Filter> authFilter() {
+    FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
+    registrationBean.setFilter(new AuthFilter());
+    registrationBean.addUrlPatterns("/home/*");
+    registrationBean.addUrlPatterns("/logout");
+    return registrationBean;
+  }
 
 }

@@ -2,7 +2,7 @@ package com.mang.medisinais.domain;
 
 import com.github.slugify.Slugify;
 import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
-import com.mang.medisinais.dto.CadastroDTO;
+import com.mang.medisinais.dto.CadastroProfissionalDTO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,11 +13,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-import java.util.Arrays;
-import java.util.List;
-
 import jakarta.validation.constraints.Size;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -69,12 +66,11 @@ public class Profissional {
   @Column(name = "foto_usuario")
   private byte[] foto;
 
-  public Profissional(CadastroDTO profissionalDTO, String senha, List<PlanoSaude> planos) {
+  public Profissional(CadastroProfissionalDTO profissionalDTO, String senha,
+      List<PlanoSaude> planos) {
     this.nome = profissionalDTO.nome();
     this.email = profissionalDTO.email();
     this.cpf = profissionalDTO.cpf();
-    profissionalDTO.endereco().setProfissional(this);
-    this.enderecos = Arrays.asList(profissionalDTO.endereco());
     this.telefone = profissionalDTO.telefone();
     this.planosAceitos = planos;
     this.especialidade = profissionalDTO.especialidade();

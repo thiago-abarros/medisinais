@@ -17,4 +17,6 @@ public interface ProfissionalRepository extends JpaRepository<Profissional, Long
   Profissional findByEmail(String email);
 
   Profissional findByCpf(String cpf);
+
+  Profissional findByTelefone(String telefone);
 }
