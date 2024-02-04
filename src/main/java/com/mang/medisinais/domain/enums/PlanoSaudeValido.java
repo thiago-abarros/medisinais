@@ -3,15 +3,15 @@ package com.mang.medisinais.domain.enums;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Objects;
-
 @Getter
 @RequiredArgsConstructor
 public enum PlanoSaudeValido {
 
-  BRADESCO("Bradesco Saúde", "Bradesco", 3L),
   UNIMED("Unimed", "Unimed", 1L),
-  AMIL("Amil", "Amil", 2L);
+  BRADESCO("Bradesco Saúde", "Bradesco", 2L),
+  AMIL("Amil", "Amil", 3L),
+  SULAMERICA("Sul América", "SulAmerica", 4L),
+  HAPVIDA("HapVida", "HapVida", 5L);
 
   private final String nome;
   private final String slug;
