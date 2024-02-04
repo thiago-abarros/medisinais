@@ -71,12 +71,15 @@ public class ProfissionalController {
 
     return ResponseEntity.status(HttpStatus.OK).build();
   }
+
   @PostMapping("/alterarCadastro")
-  public ResponseEntity<String> alterarProfissional(HttpSession sessao, AtualizarProfissionalDTO dadosProfissional, HttpServletRequest request)
+  public ResponseEntity<String> alterarProfissional(HttpSession sessao,
+      AtualizarProfissionalDTO dadosProfissional, HttpServletRequest request)
       throws MediSinaisExcecao {
 
     Long idProfissional = (Long) sessao.getAttribute("idProfissional");
-    OperacaoDTO resultadoAlteracao = profissionalService.alterarProfissional(idProfissional, dadosProfissional);
+    OperacaoDTO resultadoAlteracao = profissionalService.alterarProfissional(idProfissional,
+        dadosProfissional);
 
     if (!resultadoAlteracao.status()) {
       return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(resultadoAlteracao.mensagem());
