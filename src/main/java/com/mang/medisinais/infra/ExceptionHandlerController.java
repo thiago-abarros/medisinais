@@ -10,13 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandlerController {
 
   @ExceptionHandler(DataIntegrityViolationException.class)
-  public void tratarEntradaDuplicada(DataIntegrityViolationException exception) {
-//    OperacaoDTO exceptionDTO = new OperacaoDTO("Usuário já cadastrado",
-//        HttpStatus.BAD_REQUEST.value());
-
-    exception.printStackTrace();
-
-//    return exceptionDTO.mensagem();
+  public ResponseEntity<String> tratarEntradaDuplicada(DataIntegrityViolationException exception) {
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
   }
 
   @ExceptionHandler(MediSinaisExcecao.class)

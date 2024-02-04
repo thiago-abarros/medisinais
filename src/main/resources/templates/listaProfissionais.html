@@ -36,8 +36,8 @@
                     <label class="options"><input type="checkbox" name="planoSaude" value="Unimed" onchange="this.form.submit();">Unimed</label>
                     <label class="options"><input type="checkbox" name="planoSaude" value="Bradesco" onchange="this.form.submit();">Bradesco</label>
                     <label class="options"><input type="checkbox" name="planoSaude" value="Amil" onchange="this.form.submit();">Amil</label>
-                    <label class="options"><input type="checkbox" name="planoSaude" value="sulamerica" onchange="this.form.submit();">SulAmérica</label>
-                    <label class="options"><input type="checkbox" name="planoSaude" value="hapvida" onchange="this.form.submit();">Hapvida</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="SulAmerica" onchange="this.form.submit();">SulAmérica</label>
+                    <label class="options"><input type="checkbox" name="planoSaude" value="Hapvida" onchange="this.form.submit();">Hapvida</label>
                 </div>
                 <hr>
                 <div class="sidebar">
@@ -90,7 +90,12 @@
                         <div th:each="plano : ${profissional.planosAceitos}">
                             <li id="plano" th:text="${plano.nome}"></li>
                         </div>
-                        <li id="telefone" th:text="${profissional.telefone}"></li>
+                        <li id="telefone">
+                            <span th:text="'(' + ${#strings.substring(profissional.telefone, 0, 2)} + ') '"></span>
+                            <span th:text="${#strings.substring(profissional.telefone, 2, 7)}"></span>
+                            <span th:text="'-'"></span>
+                            <span th:text="${#strings.substring(profissional.telefone, 7)}"></span>
+                        </li>
                     </ul>
                     <a class="more-btn" th:href="'/profissional/' + ${profissional.slug}">
                         <button class="more" id="more">Ver mais</button>

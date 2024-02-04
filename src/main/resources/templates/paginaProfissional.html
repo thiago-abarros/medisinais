@@ -31,7 +31,12 @@
                     <div th:each="endereco : ${profissional.enderecos}">
                         <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
                     </div>
-                    <p th:text="${profissional.telefone}"><span><ion-icon name="call-outline"></ion-icon></span> (87) 2627-4547</p>
+                    <p th:text="${profissional.telefone}">
+                        <span th:text="'(' + ${#strings.substring(profissional.telefone, 0, 2)} + ') '"></span>
+                        <span th:text="${#strings.substring(profissional.telefone, 2, 7)}"></span>
+                        <span th:text="'-'"></span>
+                        <span th:text="${#strings.substring(profissional.telefone, 7)}"></span>
+                    </p>
                     <p>Aceita plano de saúde:</p>
                     <ul th:each="plano : ${profissional.planosAceitos}">
                         <li th:text="${plano.nome}"></li>

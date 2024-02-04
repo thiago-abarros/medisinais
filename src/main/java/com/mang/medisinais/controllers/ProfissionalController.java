@@ -103,6 +103,8 @@ public class ProfissionalController {
   public String exibirPesquisaProfissionais(FiltroDTO filtroDTO, Model model,
       HttpServletRequest request) {
     List<Profissional> profissionais = profissionalService.pesquisaProfissionais(filtroDTO);
+    //TODO limitar os campos que são retornados
+
     HttpSession sessao = request.getSession(false);
 
     model.addAttribute("logado", sessao != null);

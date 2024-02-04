@@ -11,7 +11,7 @@ public enum PlanoSaudeValido {
   BRADESCO("Bradesco Saúde", "Bradesco", 2L),
   AMIL("Amil", "Amil", 3L),
   SULAMERICA("Sul América", "SulAmerica", 4L),
-  HAPVIDA("HapVida", "HapVida", 5L);
+  HAPVIDA("HapVida", "Hapvida", 5L);
 
   private final String nome;
   private final String slug;
