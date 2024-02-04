@@ -1,8 +1,6 @@
 const wrapper = document.querySelector('.wrapper');
 const loginLink = document.querySelector('.login-link');
-const registerLink = document.querySelector('.register-link');
 const loginPopup = document.querySelector('.login-btn');
-const registerPopup = document.querySelector('.register-btn');
 const closeIcon = document.querySelector('.icon-close');
 
 function toggleActiveClass() {
@@ -17,21 +15,9 @@ loginPopup.addEventListener('click', ()=> {
     wrapper.classList.add('open');
 })
 
-registerLink.addEventListener('click', ()=> {
-    wrapper.id = '';
-    wrapper.classList.add('active');
-})
-
 loginLink.addEventListener('click', ()=> {
     wrapper.id = '';
     wrapper.classList.remove('active');
-})
-
-registerPopup.addEventListener('click', ()=> {
-    wrapper.id = '';
-    wrapper.classList.add('active-login');
-    wrapper.classList.add('active');
-    wrapper.classList.add('open');
 })
 
 closeIcon.addEventListener('click', ()=> {
