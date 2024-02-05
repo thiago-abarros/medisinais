@@ -17,10 +17,8 @@ import com.mang.medisinais.repositories.EnderecoRepository;
 import com.mang.medisinais.repositories.PlanoSaudeRepository;
 import com.mang.medisinais.repositories.ProfissionalRepository;
 import com.mang.medisinais.specifications.ProfissionalSpecification;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+
+import java.util.*;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
@@ -49,8 +47,9 @@ public class ProfissionalService {
     }
 
     String senhaHash = bcrypt.encode(dados.senha());
-    List<Long> ids = dados.planosAceitos().stream().map(PlanoSaudeValido::getId).toList();
-    List<PlanoSaude> planos = planoRepo.findAllById(ids);
+    List<PlanoSaude> planos = Optional.ofNullable(dados.planosAceitos())
+            .map(list -> list.stream().map(PlanoSaude::new).toList())
+            .orElse(Collections.emptyList());
 
     Profissional novoProfissional = new Profissional(dados, senhaHash, planos);
     Endereco novoEndereco = new Endereco(dados.endereco(), novoProfissional);

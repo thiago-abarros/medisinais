@@ -10,7 +10,7 @@ public record CadastroEnderecoDTO(@NotEmpty(message = "A rua não pode ser vazia
                                   @NotEmpty(message = "O bairro não pode ser vazio.")
                                   String bairro,
                                   @Size(min = 3, max = 40, message = "Cidade inválida.")
-                                  @Pattern(regexp = "^[a-zA-Z ]+$", message = "Cidade inválida.")
+                                  @Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ ]+$", message = "Cidade inválida.")
                                   String cidade,
                                   UnidadeFederativa uf,
                                   @NotEmpty(message = "O cep não pode ser vazio.")

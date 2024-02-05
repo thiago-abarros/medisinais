@@ -34,4 +34,9 @@ public class PlanoSaude {
   @ManyToMany(mappedBy = "planosAceitos", cascade = CascadeType.ALL)
   private List<Profissional> profissionais;
 
+  public PlanoSaude(PlanoSaudeValido planoSaudeValido) {
+    this.id = planoSaudeValido.getId();
+    this.nome = planoSaudeValido;
+  }
+
 }
