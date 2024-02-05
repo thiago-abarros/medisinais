@@ -80,14 +80,16 @@ public class ProfissionalService {
     return new OperacaoDTO(true, "Dados alterados com sucesso", idProfissional);
   }
 
-  public List<Profissional> pesquisaProfissionais(FiltroDTO filtro) {
+  public List<ResultadoDTO> pesquisaProfissionais(FiltroDTO filtro) {
     var especialidade = EspecialidadeProfissional.valueOfNome(filtro.especialidade());
     var plano = PlanoSaudeValido.valueOfNome(filtro.planoSaude());
 
-    return userRepo.findAll(Specification
-        .where(ProfissionalSpecification.temCidade(filtro.cidade())
+    List<Profissional> profissional = userRepo.findAll(Specification
+            .where(ProfissionalSpecification.temCidade(filtro.cidade())
             .and(ProfissionalSpecification.temEspecialidade(especialidade)))
-        .and(ProfissionalSpecification.temPlanoSaude(plano)));
+            .and(ProfissionalSpecification.temPlanoSaude(plano)));
+
+      return profissional.stream().map(ResultadoDTO::fromProfissional).toList();
   }
 
   public ResultadoDTO encontrarProfissionalPorSlug(String slug) throws MediSinaisExcecao {
