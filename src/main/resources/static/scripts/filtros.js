@@ -9,9 +9,15 @@ function marcarCheckbox(valores, idDiv) {
     checkboxes.forEach(function(checkbox) {
         if(valores == checkbox.value) {
             checkbox.checked = true;
+
+            if(idDiv == "especialidade") {
+                var especialidade = document.getElementById(valores)
+                var titulo = document.getElementById("titulo")
+                titulo.innerHTML = especialidade.textContent + "s " + "encontrados:"
+            }
         }
-        });
-    }
+    });
+}
 
 var cidade = pegarQueryParam('cidade');
 var plano = pegarQueryParam('planoSaude');

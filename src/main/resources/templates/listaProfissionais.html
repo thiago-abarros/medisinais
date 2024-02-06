@@ -26,9 +26,9 @@
                 <hr>
                 <div class="sidebar checkbox" id="especialidade">
                     <label class="title">Tipo de profissional</label>
-                    <label class="options"><input type="checkbox" name="especialidade" value="psicologo" onchange="this.form.submit();">Psicólogo</label>
-                    <label class="options"><input type="checkbox" name="especialidade" value="medico" onchange="this.form.submit();">Médico</label>
-                    <label class="options"><input type="checkbox" name="especialidade" value="nutricionista" onchange="this.form.submit();">Nutricionista</label>
+                    <label class="options" id="psicologo"><input type="checkbox" name="especialidade" value="psicologo" onchange="this.form.submit();">Psicólogo</label>
+                    <label class="options" id="medico"><input type="checkbox" name="especialidade" value="medico" onchange="this.form.submit();">Médico</label>
+                    <label class="options" id="nutricionista"><input type="checkbox" name="especialidade" value="nutricionista" onchange="this.form.submit();">Nutricionista</label>
                 </div>
                 <hr>
                 <div class="sidebar checkbox" id="planosSaude">
@@ -77,7 +77,7 @@
             </div>
         </aside>
         <main>
-            <h1>Profissionais encontrados:</h1>
+            <h1 id="titulo">Profissionais encontrados:</h1>
 
             <div class="professionals-box" th:each="profissional : ${profissionais}">
                 <div class="professional-box" id="box-1">
