@@ -102,11 +102,45 @@
                     </a>
                 </div>
             </div>
+            <div class="paginacao" id="paginacao"></div>
         </main>
     </section>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script type="text/javascript" th:src="@{/scripts/filtros.js}"></script>
+    <script>
+        var totalPaginas = [[${profissionais.getTotalPages}]];
+        var paginaAtual = 1;
+
+        function gerarPaginacao(totalPaginas, paginaAtual) {
+            var paginacao = document.getElementById("paginacao");
+            paginacao.innerHTML = "";
+
+            for (var i = 1; i <= totalPaginas; i++) {
+                (function(page) {
+                    var numeroPagina = document.createElement("a");
+
+                    var url = new URL(window.location.href);
+                    var numero = url.searchParams.get("pagina")
+
+                    numeroPagina.textContent = page;
+                    url.searchParams.set("pagina", page);
+                    numeroPagina.href = url;
+
+                    if (numero == null && i == 1) {
+                        numeroPagina.className = "active"
+                    } else {
+                        numeroPagina.className = (page == numero) ? "active" : "";
+                    }
+
+                    paginacao.appendChild(numeroPagina);
+                })(i);
+            }
+        }
+
+        gerarPaginacao(totalPaginas, paginaAtual);
+
+    </script>
 </body>
 </html>

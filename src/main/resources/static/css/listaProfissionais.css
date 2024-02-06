@@ -304,3 +304,35 @@ main h1 {
     background-color: rgba(33, 126, 156, 1);
     border: 1px solid #fff;
 }
+
+span.active {
+    font-weight: bold;
+}
+
+span {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.paginacao {
+    padding-bottom: 16px;
+    display: inline-block;
+}
+
+.paginacao a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.paginacao a.active {
+  background-color: rgba(33, 126, 156, 1);
+  color: white;
+  border-radius: 5px;
+}
+
+.paginacao a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}

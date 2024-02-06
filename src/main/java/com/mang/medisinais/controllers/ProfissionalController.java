@@ -14,11 +14,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -102,7 +102,7 @@ public class ProfissionalController {
   @GetMapping("/pesquisa")
   public String exibirPesquisaProfissionais(FiltroDTO filtroDTO, Model model,
       HttpServletRequest request) {
-    List<ResultadoDTO> profissionais = profissionalService.pesquisaProfissionais(filtroDTO);
+    Page<Profissional> profissionais = profissionalService.pesquisaProfissionais(filtroDTO);
 
     HttpSession sessao = request.getSession(false);
 

@@ -21,6 +21,8 @@ import com.mang.medisinais.specifications.ProfissionalSpecification;
 import java.util.*;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,7 @@ public class ProfissionalService {
   private static final String EMAIL_PROFISSIONAL_NAO_ENCONTRADO = "Email não encontrado.";
   private static final String SENHA_INCORRETA = "Senha incorreta.";
   private static final String PROFISSIONAL_NAO_ENCONTRADO = "Profissional não encontrado.";
+  private static final int PROFISSIONAIS_POR_PAGINA = 5;
 
   private final BCryptPasswordEncoder bcrypt;
   private final ProfissionalRepository userRepo;
@@ -80,16 +83,16 @@ public class ProfissionalService {
     return new OperacaoDTO(true, "Dados alterados com sucesso", idProfissional);
   }
 
-  public List<ResultadoDTO> pesquisaProfissionais(FiltroDTO filtro) {
+  public Page<Profissional> pesquisaProfissionais(FiltroDTO filtro) {
     var especialidade = EspecialidadeProfissional.valueOfNome(filtro.especialidade());
     var plano = PlanoSaudeValido.valueOfNome(filtro.planoSaude());
+    int pagina = filtro.pagina() != null ? Integer.parseInt(filtro.pagina()) - 1 : 0;
+    var paginacao = PageRequest.of(pagina, PROFISSIONAIS_POR_PAGINA);
 
-    List<Profissional> profissional = userRepo.findAll(Specification
-            .where(ProfissionalSpecification.temCidade(filtro.cidade())
-            .and(ProfissionalSpecification.temEspecialidade(especialidade)))
-            .and(ProfissionalSpecification.temPlanoSaude(plano)));
-
-      return profissional.stream().map(ResultadoDTO::fromProfissional).toList();
+      return userRepo.findAll(Specification
+              .where(ProfissionalSpecification.temCidade(filtro.cidade())
+              .and(ProfissionalSpecification.temEspecialidade(especialidade)))
+              .and(ProfissionalSpecification.temPlanoSaude(plano)), paginacao);
   }
 
   public ResultadoDTO encontrarProfissionalPorSlug(String slug) throws MediSinaisExcecao {
