@@ -95,37 +95,8 @@
             </form>
         </section>
 
-        <div class="wrapper-container">
-            <div class="wrapper">
-                <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+        <div th:replace="~{fragments/modalLogin :: modalLogin}"></div>
 
-                <div class="forms-box login">
-                    <h2>Login</h2>
-                    <form action="#" method="POST" id="loginForm">
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="email"></ion-icon></span>
-                            <input type="email" required id="email" name="email">
-                            <label>Email</label>
-                        </div>
-                        <div class="input-box">
-                            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                            <input type="password" required id="senha" name="senha">
-                            <label>Senha</label>
-                        </div>
-                        <div class="remember-forgot">
-                            <label><input type="checkbox">Lembrar de mim</label>
-                            <a href="#">Esqueceu a senha?</a>
-                        </div>
-                        <button type="submit" class="submit-btn">Login</button>
-                        <div class="login-register">
-                            <p>Não possui uma conta? <a href="#" class="register-link">Registre-se</a></p>
-                        </div>
-                        <div class="msgErro" id="msgErro"></div>
-                    </form>
-                </div>
-
-            </div>
-        </div>
     </main>
     <footer>
         <p>© 2023 MediSinais S.A. Todos os direitos reservados</p>
@@ -134,7 +105,6 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" th:src="@{/scripts/home.js}"></script>
     <script type="text/javascript" th:src="@{/scripts/login.js}"></script>
     <script type="text/javascript" th:src="@{/scripts/selectUf.js}"></script>
     <script type="text/javascript" th:src="@{/scripts/cadastro.js}"></script>

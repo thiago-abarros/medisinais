@@ -1,0 +1,30 @@
+<div class="wrapper-container" th:fragment="modalLogin">
+    <div class="wrapper">
+        <span class="icon-close"><ion-icon name="close"></ion-icon></span>
+
+        <div class="forms-box login">
+            <h2>Login</h2>
+            <form action="#" method="POST" id="loginForm">
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="email"></ion-icon></span>
+                    <input type="email" required id="email" name="email">
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" required id="senha" name="senha">
+                    <label>Senha</label>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox">Lembrar de mim</label>
+                    <a href="#">Esqueceu a senha?</a>
+                </div>
+                <button type="submit" class="submit-btn">Login</button>
+                <div class="login-register">
+                    <p>Não possui uma conta? <a href="/cadastro" class="register-link">Registre-se</a></p>
+                </div>
+                <div id="msgErro" style="display: none; color: red;"></div>
+            </form>
+        </div>
+    </div>
+</div>
