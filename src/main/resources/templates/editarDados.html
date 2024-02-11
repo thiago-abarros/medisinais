@@ -8,6 +8,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/css/global.css}">
     <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastro.css}">
     <title>Cadastro - MediSinais</title>
 </head>
 <body>
@@ -15,61 +16,69 @@
 <!-- Nav bar -->
 <main>
     <section class="search-box" style="height: 680px">
+        <div class="register-form">
+            <div class="form-register-box">
+                <h2>Edite as informações de sua escolha</h2>
+                <form action="#" id="editarDadosFrom">
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="person"></ion-icon></span>
+                        <input type="text" id="nome" name="nome" th:value="${profissional.nome}" required>
+                        <label>Nome</label>
+                        <div class="msgErro" id="msgErronome"></div>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" id="email" name="email" th:value="${profissional.email}" disabled>
+                        <label>Email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="call"></ion-icon></span>
+                        <input type="text" id="telefone" name="telefone" th:value="${profissional.telefone}" required>
+                        <label>Telefone</label>
+                        <div class="msgErro" id="msgErrotelefone"></div>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="id-card"></ion-icon></span>
+                        <input type="text" id="cpf" name="cpf" th:value="${profissional.cpf}" disabled>
+                        <label>CPF</label>
+                    </div>
+                    <div class="adress">
+                        <div class="left-box">
+                            <label>Rua</label>
+                            <input type="text" id="rua" name="endereco.rua" th:value="${profissional.endereco.rua}" required>
+                            <div class="msgErro" id="msgErrorua"></div>
+                            <label>Bairro</label>
+                            <input type="text" id="bairro" name="endereco.bairro" th:value="${profissional.endereco.bairro}" required>
+                            <div class="msgErro" id="msgErrobairro"></div>
+                        </div>
+                        <div class="right-box">
+                            <label>CEP</label>
+                            <input type="text" id="cep" name="endereco.cep" th:value="${profissional.endereco.cep}" required>
+                            <div class="msgErro" id="msgErrocep"></div>
+                            <label>Cidade</label>
+                            <input type="text" id="cidade" name="endereco.cidade" th:value="${profissional.endereco.cidade}" required>
+                            <div class="msgErro" id="msgErrocidade"></div>
+                            <label>UF</label>
+                            <select id="uf" name="endereco.uf" required=""><option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select>
+                            <div class="msgErro" id="msgErrouf"></div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="insurance" id="planosAceitos">
+                        <label>Planos aceitos:</label>
+                        <label><input type="checkbox" name="planosAceitos" value="UNIMED">Unimed</label>
+                        <label><input type="checkbox" name="planosAceitos" value="AMIL">Amil</label>
+                        <label><input type="checkbox" name="planosAceitos" value="BRADESCO">Bradesco</label>
+                        <label><input type="checkbox" name="planosAceitos" value="SULAMERICA">Sul América</label>
+                        <label><input type="checkbox" name="planosAceitos" value="HAPVIDA">Hapvida</label>
+                    </div>
 
-        <form action="#" id="editarDadosFrom">
-            <div class="input-box">
-                <span class="icon"><ion-icon name="person"></ion-icon></span>
-                <input type="text" id="nome" name="nome" th:value="${profissional.nome}" required>
-                <label>Nome</label>
-                <div class="msgErro" id="msgErronome"></div>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                <input type="email" id="email" name="email" th:value="${profissional.email}" disabled>
-                <label>Email</label>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="call"></ion-icon></span>
-                <input type="text" id="telefone" name="telefone" th:value="${profissional.telefone}" required>
-                <label>Telefone</label>
-                <div class="msgErro" id="msgErrotelefone"></div>
-            </div>
-            <div class="input-box">
-                <span class="icon"><ion-icon name="id-card"></ion-icon></span>
-                <input type="text" id="cpf" name="cpf" th:value="${profissional.cpf}" disabled>
-                <label>CPF</label>
-            </div>
-            <div>
-                <label>Rua</label>
-                <input type="text" id="rua" name="endereco.rua" th:value="${profissional.endereco.rua}" required>
-                <div class="msgErro" id="msgErrorua"></div>
-                <label>Bairro</label>
-                <input type="text" id="bairro" name="endereco.bairro" th:value="${profissional.endereco.bairro}" required>
-                <div class="msgErro" id="msgErrobairro"></div>
-                <label>CEP</label>
-                <input type="text" id="cep" name="endereco.cep" th:value="${profissional.endereco.cep}" required>
-                <div class="msgErro" id="msgErrocep"></div>
-                <label>Cidade</label>
-                <input type="text" id="cidade" name="endereco.cidade" th:value="${profissional.endereco.cidade}" required>
-                <div class="msgErro" id="msgErrocidade"></div>
-                <label>UF</label>
-                <select id="uf" name="endereco.uf" required=""><option value="AC">AC</option><option value="AL">AL</option><option value="AP">AP</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MT">MT</option><option value="MS">MS</option><option value="MG">MG</option><option value="PA">PA</option><option value="PB">PB</option><option value="PR">PR</option><option value="PE">PE</option><option value="PI">PI</option><option value="RJ">RJ</option><option value="RN">RN</option><option value="RS">RS</option><option value="RO">RO</option><option value="RR">RR</option><option value="SC">SC</option><option value="SP">SP</option><option value="SE">SE</option><option value="TO">TO</option></select>
-                <div class="msgErro" id="msgErrouf"></div>
-            </div>
-            <br>
-            <div id="planosAceitos">
-                Planos aceitos
-                <label><input type="checkbox" name="planosAceitos" value="UNIMED">Unimed</label>
-                <label><input type="checkbox" name="planosAceitos" value="AMIL">Amil</label>
-                <label><input type="checkbox" name="planosAceitos" value="BRADESCO">Bradesco</label>
-                <label><input type="checkbox" name="planosAceitos" value="SULAMERICA">Sul América</label>
-                <label><input type="checkbox" name="planosAceitos" value="HAPVIDA">Hapvida</label>
-            </div>
+                    <br>
 
-            <br>
-
-            <button type="submit" class="submit-btn">Editar dados</button>
-        </form>
+                    <button type="submit" class="submit-btn">Editar dados</button>
+                </form>
+            </div>
+        </div>
     </section>
 
 </main>
