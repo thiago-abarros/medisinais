@@ -25,9 +25,9 @@ CREATE TABLE IF NOT EXISTS public.endereco
     cidade character varying(40) COLLATE pg_catalog."default" NOT NULL,
     rua character varying(255) COLLATE pg_catalog."default" NOT NULL,
     uf character varying(2) COLLATE pg_catalog."default" NOT NULL,
-    profissional_id_profissional uuid,
+    id_profissional uuid,
     CONSTRAINT endereco_pkey PRIMARY KEY (id_endereco),
-    CONSTRAINT fknxd94kr2j9k3dwu4eh5ha90v1 FOREIGN KEY (profissional_id_profissional)
+    CONSTRAINT fknxd94kr2j9k3dwu4eh5ha90v1 FOREIGN KEY (id_profissional)
         REFERENCES public.profissional (id_profissional) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,

@@ -1,4 +1,4 @@
-INSERT INTO endereco(id_endereco, bairro, cep, cidade, rua, uf, profissional_id_profissional)
+INSERT INTO endereco(id_endereco, bairro, cep, cidade, rua, uf, id_profissional)
 	VALUES
 		('69fdd168-9302-4bdc-b7b1-3f4f0f98d9e1','Serra Centro','29176019','Serra','Rua Arnaldo Ferreira Castelo, 762','ES','1f117abb-3503-4958-bd74-6f5277018e85'),
 		('194d122f-4464-4fa2-abc2-9e7aca26b1e7','Boa Vista','55292446','Garanhuns','Rua Ailton Vilela de Moraes, 278','PE','cc847f5b-401a-4378-bac0-5f0a9563e252'),

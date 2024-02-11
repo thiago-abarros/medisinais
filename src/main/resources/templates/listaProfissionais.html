@@ -84,9 +84,8 @@
                 <div class="professional-box" id="box-1">
                     <ul class="information">
                         <li id="nome" th:text="${profissional.nome}"></li>
-                        <div th:each="endereco : ${profissional.enderecos}">
-                            <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
-                        </div>
+                        <li id="endereco" th:text="${profissional.endereco.rua} + ' - ' + ${profissional.endereco.bairro} +
+                        '. ' + ${profissional.endereco.cidade} + '-' + ${profissional.endereco.uf}"></li>
                         <li>
                             <span th:if="${!profissional.planosAceitos.isEmpty}">Aceita plano de saúde.</span>
                             <span th:unless="${!profissional.planosAceitos.isEmpty}">Não aceita plano de saúde.</span>

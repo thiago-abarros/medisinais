@@ -1,5 +1,7 @@
 package com.mang.medisinais.services;
 
+import com.mang.medisinais.domain.Profissional;
+import com.mang.medisinais.dto.AtualizarProfissionalDTO;
 import com.mang.medisinais.dto.CadastroEnderecoDTO;
 import com.mang.medisinais.dto.CadastroProfissionalDTO;
 import com.mang.medisinais.repositories.ProfissionalRepository;
@@ -8,6 +10,8 @@ import jakarta.validation.Validator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +39,24 @@ public class ValidadorService {
     }
     if (userRepo.findByTelefone(profissional.telefone()) != null) {
       mensagens.put("telefone", "Telefone já cadastrado");
+    }
+
+    return mensagens;
+  }
+
+  public Map<String, String> validarEdicao(UUID id, AtualizarProfissionalDTO profissional) {
+    Map<String, String> mensagens = new HashMap<>();
+
+    Set<ConstraintViolation<AtualizarProfissionalDTO>> violacoesProfissional = validator.validate(profissional);
+    Set<ConstraintViolation<CadastroEnderecoDTO>> violacoesEndereco = validator.validate(profissional.endereco());
+
+    mensagens.putAll(pegarViolacao(violacoesProfissional));
+    mensagens.putAll(pegarViolacao(violacoesEndereco));
+
+    Profissional profissional1 = userRepo.findByTelefone(profissional.telefone());
+
+    if (profissional1 != null && (!profissional1.getId().equals(id))) {
+        mensagens.put("telefone", "Telefone já cadastrado");
     }
 
     return mensagens;

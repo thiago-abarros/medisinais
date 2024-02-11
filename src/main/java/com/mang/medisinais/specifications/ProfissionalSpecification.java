@@ -14,7 +14,7 @@ public class ProfissionalSpecification {
 
   public static Specification<Profissional> temCidade(String cidade) {
     return (root, query, cb) -> cidade == null || cidade.isEmpty() ? cb.conjunction() :
-        cb.equal(root.join("enderecos", JoinType.INNER).get("cidade"), cidade);
+        cb.equal(root.join("endereco", JoinType.INNER).get("cidade"), cidade);
   }
 
   public static Specification<Profissional> temEspecialidade(

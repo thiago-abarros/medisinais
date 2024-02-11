@@ -2,14 +2,7 @@ package com.mang.medisinais.domain;
 
 import com.mang.medisinais.domain.enums.UnidadeFederativa;
 import com.mang.medisinais.dto.CadastroEnderecoDTO;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -45,7 +38,8 @@ public class Endereco {
   @Column(nullable = false, length = 8)
   private int cep;
 
-  @ManyToOne
+  @OneToOne
+  @JoinColumn(name = "id_profissional", referencedColumnName = "id_profissional")
   private Profissional profissional;
 
   public Endereco(CadastroEnderecoDTO enderecoDTO, Profissional profissional) {

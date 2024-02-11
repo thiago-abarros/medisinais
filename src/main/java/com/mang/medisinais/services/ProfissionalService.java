@@ -10,7 +10,7 @@ import com.mang.medisinais.dto.CadastroProfissionalDTO;
 import com.mang.medisinais.dto.FiltroDTO;
 import com.mang.medisinais.dto.LoginDTO;
 import com.mang.medisinais.dto.OperacaoDTO;
-import com.mang.medisinais.dto.ResultadoCadastroDTO;
+import com.mang.medisinais.dto.ResultadoOpProfissionalDTO;
 import com.mang.medisinais.dto.ResultadoDTO;
 import com.mang.medisinais.infra.MediSinaisExcecao;
 import com.mang.medisinais.repositories.EnderecoRepository;
@@ -21,6 +21,7 @@ import com.mang.medisinais.specifications.ProfissionalSpecification;
 import java.util.*;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
@@ -42,11 +43,11 @@ public class ProfissionalService {
   private final PlanoSaudeRepository planoRepo;
   private final ValidadorService validador;
 
-  public ResultadoCadastroDTO criarProfissional(CadastroProfissionalDTO dados) {
+  public ResultadoOpProfissionalDTO criarProfissional(CadastroProfissionalDTO dados) {
     Map<String, String> mensagens = validador.validarProfissional(dados);
 
     if (!mensagens.isEmpty()) {
-      return new ResultadoCadastroDTO(false, mensagens);
+      return new ResultadoOpProfissionalDTO(false, mensagens);
     }
 
     String senhaHash = bcrypt.encode(dados.senha());
@@ -60,27 +61,34 @@ public class ProfissionalService {
     this.userRepo.save(novoProfissional);
     this.enderecoRepo.save(novoEndereco);
 
-    return new ResultadoCadastroDTO(true, mensagens);
+    return new ResultadoOpProfissionalDTO(true, mensagens);
   }
 
-  public OperacaoDTO alterarProfissional(UUID idProfissional, AtualizarProfissionalDTO dados)
+  public ResultadoOpProfissionalDTO alterarProfissional(UUID idProfissional, AtualizarProfissionalDTO dados)
       throws MediSinaisExcecao {
-    // TODO Validação
+    Map<String, String> mensagens = validador.validarEdicao(idProfissional, dados);
+
+    if (!mensagens.isEmpty()) {
+      return new ResultadoOpProfissionalDTO(false, mensagens);
+    }
 
     Profissional profissional = encontrarProfissionalPorId(idProfissional);
-    Endereco endereco = new Endereco(dados.endereco(), profissional);
-    String senhaHash = bcrypt.encode(dados.senha());
+    Endereco endereco = enderecoRepo.getReferenceById(profissional.getEndereco().getId());
 
-    profissional.setNome(dados.nome());
-    profissional.setFoto(dados.foto());
-    profissional.setEmail(dados.email());
-    profissional.setPlanosAceitos(dados.planosAceitos());
-    profissional.setSenha(senhaHash);
+    List<PlanoSaude> planos = Optional.ofNullable(dados.planosAceitos())
+            .map(list -> list.stream().map(PlanoSaude::new).toList())
+            .orElse(Collections.emptyList());
+
+    List<PlanoSaude> planosArrayList = new ArrayList<>(planos);
+
+    BeanUtils.copyProperties(dados,profissional);
+    BeanUtils.copyProperties(dados.endereco(), endereco);
+    profissional.setPlanosAceitos(planosArrayList);
 
     this.userRepo.save(profissional);
     this.enderecoRepo.save(endereco);
 
-    return new OperacaoDTO(true, "Dados alterados com sucesso", idProfissional);
+    return new ResultadoOpProfissionalDTO(true, mensagens);
   }
 
   public Page<Profissional> pesquisaProfissionais(FiltroDTO filtro) {

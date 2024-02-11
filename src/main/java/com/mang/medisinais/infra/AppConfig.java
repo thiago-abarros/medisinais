@@ -20,6 +20,7 @@ public class AppConfig {
     FilterRegistrationBean<Filter> registrationBean = new FilterRegistrationBean<>();
     registrationBean.setFilter(new AuthFilter());
     registrationBean.addUrlPatterns("/home/*");
+    registrationBean.addUrlPatterns("/editar-dados");
     registrationBean.addUrlPatterns("/logout");
     return registrationBean;
   }

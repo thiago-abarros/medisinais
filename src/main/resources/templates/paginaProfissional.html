@@ -28,9 +28,8 @@
                 </div>
                 <div class="information-container">
                     <h2 th:text="${profissional.nome}"></h2>
-                    <div class="endereco" th:each="endereco : ${profissional.enderecos}">
-                        <li id="endereco" th:text="${endereco.rua} + ' - ' + ${endereco.bairro} + '. ' + ${endereco.cidade} + '-' + ${endereco.uf}"></li>
-                    </div>
+                    <li id="endereco" th:text="${profissional.endereco.rua} + ' - ' + ${profissional.endereco.bairro}
+                    + '. ' + ${profissional.endereco.cidade} + '-' + ${profissional.endereco.uf}"></li>
                     <p th:text="${profissional.telefone}">
                         <span th:text="'(' + ${#strings.substring(profissional.telefone, 0, 2)} + ') '"></span>
                         <span th:text="${#strings.substring(profissional.telefone, 2, 7)}"></span>

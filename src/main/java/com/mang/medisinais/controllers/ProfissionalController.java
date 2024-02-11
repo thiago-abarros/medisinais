@@ -1,13 +1,7 @@
 package com.mang.medisinais.controllers;
 
 import com.mang.medisinais.domain.Profissional;
-import com.mang.medisinais.dto.AtualizarProfissionalDTO;
-import com.mang.medisinais.dto.CadastroProfissionalDTO;
-import com.mang.medisinais.dto.FiltroDTO;
-import com.mang.medisinais.dto.LoginDTO;
-import com.mang.medisinais.dto.OperacaoDTO;
-import com.mang.medisinais.dto.ResultadoCadastroDTO;
-import com.mang.medisinais.dto.ResultadoDTO;
+import com.mang.medisinais.dto.*;
 import com.mang.medisinais.infra.MediSinaisExcecao;
 import com.mang.medisinais.services.ProfissionalService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -50,11 +44,11 @@ public class ProfissionalController {
   @PostMapping("/cadastro")
   public ResponseEntity<Map<String, String>> cadastrarProfissional(
       CadastroProfissionalDTO dadosProfissional) {
-    ResultadoCadastroDTO resultadoCadastroDTO = profissionalService.criarProfissional(
+    ResultadoOpProfissionalDTO resultadoOpProfissionalDTO = profissionalService.criarProfissional(
         dadosProfissional);
 
-    if (!resultadoCadastroDTO.status()) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoCadastroDTO.mensagens());
+    if (!resultadoOpProfissionalDTO.status()) {
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(resultadoOpProfissionalDTO.mensagens());
     }
 
     return ResponseEntity.status(HttpStatus.OK).build();
@@ -74,20 +68,31 @@ public class ProfissionalController {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @PostMapping("/alterarCadastro")
-  public ResponseEntity<String> alterarProfissional(HttpSession sessao,
+  @GetMapping("/editar-dados")
+  public String exibirPaginaEditarDados(HttpSession sessao, Model model) throws MediSinaisExcecao {
+    UUID idProfissional = (UUID) sessao.getAttribute("idProfissional");
+
+    Profissional profissional = profissionalService.encontrarProfissionalPorId(idProfissional);
+
+    model.addAttribute("profissional", ProfissionalDTO.fromProfissional(profissional));
+
+    return "editarDados";
+  }
+
+  @PostMapping("/editar-dados")
+  public ResponseEntity<Map<String, String>> alterarProfissional(HttpSession sessao,
       AtualizarProfissionalDTO dadosProfissional, HttpServletRequest request)
       throws MediSinaisExcecao {
 
     UUID idProfissional = (UUID) sessao.getAttribute("idProfissional");
-    OperacaoDTO resultadoAlteracao = profissionalService.alterarProfissional(idProfissional,
+    ResultadoOpProfissionalDTO resultadoAlteracao = profissionalService.alterarProfissional(idProfissional,
         dadosProfissional);
 
     if (!resultadoAlteracao.status()) {
-      return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body(resultadoAlteracao.mensagem());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resultadoAlteracao.mensagens());
     }
 
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    return ResponseEntity.status(HttpStatus.OK).build();
   }
 
   @GetMapping("/home")
