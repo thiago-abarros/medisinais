@@ -1,0 +1,70 @@
+.register-form {
+    background: #fff;
+    border: 3px solid rgba(33, 126, 156, 1);
+    border-radius: 11px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform .5s ease, height .2s
+}
+
+.form-register-box {
+    width: 100%;
+    padding: 40px;
+}
+
+.form-register-box h2 {
+    font-size: 2em;
+    color: #217e9c;
+    text-align: center;
+}
+
+.adress {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.adress label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.adress input,
+.adress select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.specialty label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.specialty input,
+.specialty select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+.insurance {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.insurance span {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.insurance input {
+    margin-right: 5px;
+}

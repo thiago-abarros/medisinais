@@ -8,6 +8,7 @@
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" th:href="@{/css/global.css}">
     <link rel="stylesheet" th:href="@{/css/home.css}">
+    <link rel="stylesheet" th:href="@{/css/cadastro.css}">
     <title>Cadastro - MediSinais</title>
 </head>
 <body>
@@ -15,84 +16,93 @@
     <!-- Nav bar -->
     <main>
         <section class="search-box" style="height: 680px">
-            <form action="#" id="cadastroForm">
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="person"></ion-icon></span>
-                    <input type="text" id="nome" name="nome" required>
-                    <label>Nome</label>
-                    <div class="msgErro" id="msgErronome"></div>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="email" id="email" name="email" required>
-                    <label>Email</label>
-                    <div class="msgErro" id="msgErroemail"></div>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <input type="password" id="senha" name="senha" required>
-                    <label>Senha</label>
-                    <div class="msgErro" id="msgErrosenha"></div>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="call"></ion-icon></span>
-                    <input type="text" id="telefone" name="telefone" required>
-                    <label>Telefone</label>
-                    <div class="msgErro" id="msgErrotelefone"></div>
-                </div>
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="id-card"></ion-icon></span>
-                    <input type="text" id="cpf" name="cpf" required>
-                    <label>CPF</label>
-                    <div class="msgErro" id="msgErrocpf"></div>
-                </div>
-                <div>
-                    <label>Rua</label>
-                    <input type="text" id="rua" name="endereco.rua" required>
-                    <div class="msgErro" id="msgErrorua"></div>
-                    <label>Bairro</label>
-                    <input type="text" id="bairro" name="endereco.bairro" required>
-                    <div class="msgErro" id="msgErrobairro"></div>
-                    <label>CEP</label>
-                    <input type="text" id="cep" name="endereco.cep" required>
-                    <div class="msgErro" id="msgErrocep"></div>
-                    <label>Cidade</label>
-                    <input type="text" id="cidade" name="endereco.cidade">
-                    <div class="msgErro" id="msgErrocidade"></div>
-                    <label>UF</label>
-                    <select id="uf" name="endereco.uf" required></select>
-                    <div class="msgErro" id="msgErrouf"></div>
-                </div>
-                <br>
-                <div>
-                    <label>Especialidade</label>
-                    <select id="especialidade" name="especialidade">
-                        <option value="MEDICO">Médico</option>
-                        <option value="PSICOLOGO">Psicológo</option>
-                        <option value="NUTRICIONISTA">Nutricionista</option>
-                    </select>
-                </div>
+            <div class="register-form">
+                <div class="form-register-box">
+                    <h2>Cadastre-se</h2>
+                    <form action="#" id="cadastroForm">
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="person"></ion-icon></span>
+                            <input type="text" id="nome" name="nome" required>
+                            <label>Nome</label>
+                            <div class="msgErro" id="msgErronome"></div>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                            <input type="email" id="email" name="email" required>
+                            <label>Email</label>
+                            <div class="msgErro" id="msgErroemail"></div>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                            <input type="password" id="senha" name="senha" required>
+                            <label>Senha</label>
+                            <div class="msgErro" id="msgErrosenha"></div>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="call"></ion-icon></span>
+                            <input type="text" id="telefone" name="telefone" required>
+                            <label>Telefone</label>
+                            <div class="msgErro" id="msgErrotelefone"></div>
+                        </div>
+                        <div class="input-box">
+                            <span class="icon"><ion-icon name="id-card"></ion-icon></span>
+                            <input type="text" id="cpf" name="cpf" required>
+                            <label>CPF</label>
+                            <div class="msgErro" id="msgErrocpf"></div>
+                        </div>
+                        <div class="adress">
+                            <div class="left-box">
+                                <label>Rua</label>
+                                <input type="text" id="rua" name="endereco.rua" required>
+                                <div class="msgErro" id="msgErrorua"></div>
+                                <label>Bairro</label>
+                                <input type="text" id="bairro" name="endereco.bairro" required>
+                                <div class="msgErro" id="msgErrobairro"></div>
+                            </div>
+                            <div class="right-box">
+                                <label>CEP</label>
+                                <input type="text" id="cep" name="endereco.cep" required>
+                                <div class="msgErro" id="msgErrocep"></div>
+                                <label>Cidade</label>
+                                <input type="text" id="cidade" name="endereco.cidade">
+                                <div class="msgErro" id="msgErrocidade"></div>
+                                <label>UF</label>
+                                <select id="uf" name="endereco.uf" required></select>
+                                <div class="msgErro" id="msgErrouf"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="specialty">
+                            <label>Especialidade</label>
+                            <select id="especialidade" name="especialidade">
+                                <option value="MEDICO">Médico</option>
+                                <option value="PSICOLOGO">Psicológo</option>
+                                <option value="NUTRICIONISTA">Nutricionista</option>
+                            </select>
+                        </div>
 
-                <br>
-                <div>
-                    Planos aceitos
-                    <label><input type="checkbox" name="planosAceitos" value="UNIMED">Unimed</label>
-                    <label><input type="checkbox" name="planosAceitos" value="AMIL">Amil</label>
-                    <label><input type="checkbox" name="planosAceitos" value="BRADESCO">Bradesco</label>
-                    <label><input type="checkbox" name="planosAceitos" value="SULAMERICA">Sul América</label>
-                    <label><input type="checkbox" name="planosAceitos" value="HAPVIDA">Hapvida</label>
-                </div>
+                        <br>
+                        <div class="insurance">
+                            <label>Planos aceitos:</label>
+                            <label><input type="checkbox" name="planosAceitos" value="UNIMED">Unimed</label>
+                            <label><input type="checkbox" name="planosAceitos" value="AMIL">Amil</label>
+                            <label><input type="checkbox" name="planosAceitos" value="BRADESCO">Bradesco</label>
+                            <label><input type="checkbox" name="planosAceitos" value="SULAMERICA">Sul América</label>
+                            <label><input type="checkbox" name="planosAceitos" value="HAPVIDA">Hapvida</label>
+                        </div>
 
-                <br><br><br>
+                        <br><br><br>
 
-                <div class="remember-forgot">
-                    <label><input type="checkbox">Eu aceito todos os termos e condições</label>
+                        <div class="remember-forgot">
+                            <label><input type="checkbox">Eu aceito todos os termos e condições</label>
+                        </div>
+                        <button type="submit" class="submit-btn">Cadastrar</button>
+                        <div class="login-register">
+                            <p>Já possui uma conta? <a href="#" class="login-link">Login</a></p>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="submit-btn">Cadastrar</button>
-                <div class="login-register">
-                    <p>Já possui uma conta? <a href="#" class="login-link">Login</a></p>
-                </div>
-            </form>
+            </div>
         </section>
 
         <div th:replace="~{fragments/modalLogin :: modalLogin}"></div>
