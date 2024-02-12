@@ -12,6 +12,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -95,15 +96,6 @@ public class ProfissionalController {
     return ResponseEntity.status(HttpStatus.OK).build();
   }
 
-  @GetMapping("/home")
-  public String exibirHomeProfissional(Model model, HttpSession sessao) {
-    Profissional profissional = (Profissional) sessao.getAttribute("dadosProfissional");
-
-    model.addAttribute("profissional", profissional);
-
-    return "paginaInicial";
-  }
-
   @GetMapping("/pesquisa")
   public String exibirPesquisaProfissionais(FiltroDTO filtroDTO, Model model,
       HttpServletRequest request) {
@@ -122,8 +114,10 @@ public class ProfissionalController {
       HttpServletRequest request) throws MediSinaisExcecao {
     ResultadoDTO profissional = profissionalService.encontrarProfissionalPorSlug(slug);
     HttpSession sessao = request.getSession(false);
+    String foto = Base64.encodeBase64String(profissional.foto());
 
     model.addAttribute("profissional", profissional);
+    model.addAttribute("foto", foto);
     model.addAttribute("logado", sessao != null);
 
     return "paginaProfissional";

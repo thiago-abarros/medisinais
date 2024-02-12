@@ -19,7 +19,7 @@
             <div class="register-form">
                 <div class="form-register-box">
                     <h2>Cadastre-se</h2>
-                    <form action="#" id="cadastroForm">
+                    <form action="#" id="cadastroForm" enctype="multipart/form-data">
                         <div class="input-box">
                             <span class="icon"><ion-icon name="person"></ion-icon></span>
                             <input type="text" id="nome" name="nome" required>
@@ -71,7 +71,7 @@
                                 <div class="msgErro" id="msgErrouf"></div>
                             </div>
                         </div>
-                        <br>
+                        
                         <div class="specialty">
                             <label>Especialidade</label>
                             <select id="especialidade" name="especialidade">
@@ -91,11 +91,18 @@
                             <label><input type="checkbox" name="planosAceitos" value="HAPVIDA">Hapvida</label>
                         </div>
 
+                        <br>
+
+                        <label for="foto">Escolha uma foto:</label>
+                        <input type="file" name="foto" id="foto" accept="image/*">
+
                         <br><br><br>
 
                         <div class="remember-forgot">
                             <label><input type="checkbox">Eu aceito todos os termos e condições</label>
                         </div>
+
+
                         <button type="submit" class="submit-btn">Cadastrar</button>
                         <div class="login-register">
                             <p>Já possui uma conta? <a href="#" class="login-link">Login</a></p>

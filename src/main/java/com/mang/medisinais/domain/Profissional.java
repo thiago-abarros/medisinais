@@ -5,6 +5,8 @@ import com.mang.medisinais.domain.enums.EspecialidadeProfissional;
 import com.mang.medisinais.dto.CadastroProfissionalDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -68,7 +70,15 @@ public class Profissional {
     this.planosAceitos = planos;
     this.especialidade = profissionalDTO.especialidade();
     this.senha = senha;
-    this.foto = profissionalDTO.foto();
+    try {
+      if(profissionalDTO.foto().isEmpty()) {
+        this.foto = null;
+      } else {
+        this.foto = profissionalDTO.foto().getBytes();
+      }
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
     this.slug = Slugify.builder().build().slugify(profissionalDTO.nome());
   }
 }

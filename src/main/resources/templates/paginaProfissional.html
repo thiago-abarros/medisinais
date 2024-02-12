@@ -24,7 +24,8 @@
             </div>
             <div class="profissional-box">
                 <div class="img-container">
-                    <img src="" alt="imagem do profissional">
+                    <img th:if="${foto != null}" th:src="'data:image/jpeg;base64,' + ${foto}" alt="imagem do profissional">
+                    <img th:unless="${foto != null}" th:src="@{/assets/userIcon.png}" alt="imagem padrão">
                 </div>
                 <div class="information-container">
                     <h2 th:text="${profissional.nome}"></h2>

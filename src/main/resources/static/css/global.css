@@ -12,7 +12,7 @@ body {
     background-color: #f5f5f5;
 }
 
-h1, h2, h3, p, li, a, button {
+h1, h2, h3, p, li, a, button, label {
     font-family: "Inter", sans-serif;
     color: #000;
     text-decoration: none;
