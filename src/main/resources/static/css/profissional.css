@@ -145,11 +145,8 @@ main {
     margin-left: 40px;
 }
 
-.endereco {
+#endereco {
     padding-bottom: 10px;
-}
-
-.endereco li {
     list-style: none;
 }
 
