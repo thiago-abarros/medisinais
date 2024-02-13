@@ -29,11 +29,11 @@
           </ul>
         </div>
         <div class="bottom-search">
-          <input type="text" id="search-input" placeholder="Digite o nome do profisional">
-          <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
-          <a href="search">
+          <form action="/pesquisa" method="GET">
+            <input type="text" id="search-input" name="nome" placeholder="Digite o nome do profisional">
+            <!-- <i class="fa-solid fa-magnifying-glass"></i> -->
             <button class="search-btn">Procure</button>
-          </a>
+          </form>
         </div>
       </section>
 

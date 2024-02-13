@@ -145,7 +145,7 @@ header button {
     width: 100%;
 }
 
-.bottom-search input {
+#search-input {
     width: 100%;
     height: 60px;
     padding: 1rem;

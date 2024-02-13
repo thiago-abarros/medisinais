@@ -14,7 +14,6 @@ import com.mang.medisinais.dto.ResultadoOpProfissionalDTO;
 import com.mang.medisinais.dto.ResultadoDTO;
 import com.mang.medisinais.infra.MediSinaisExcecao;
 import com.mang.medisinais.repositories.EnderecoRepository;
-import com.mang.medisinais.repositories.PlanoSaudeRepository;
 import com.mang.medisinais.repositories.ProfissionalRepository;
 import com.mang.medisinais.specifications.ProfissionalSpecification;
 
@@ -40,7 +39,6 @@ public class ProfissionalService {
   private final BCryptPasswordEncoder bcrypt;
   private final ProfissionalRepository userRepo;
   private final EnderecoRepository enderecoRepo;
-  private final PlanoSaudeRepository planoRepo;
   private final ValidadorService validador;
 
   public ResultadoOpProfissionalDTO criarProfissional(CadastroProfissionalDTO dados) {
@@ -100,7 +98,8 @@ public class ProfissionalService {
       return userRepo.findAll(Specification
               .where(ProfissionalSpecification.temCidade(filtro.cidade())
               .and(ProfissionalSpecification.temEspecialidade(especialidade)))
-              .and(ProfissionalSpecification.temPlanoSaude(plano)), paginacao);
+              .and(ProfissionalSpecification.temPlanoSaude(plano))
+              .and(ProfissionalSpecification.temNome(filtro.nome())), paginacao);
   }
 
   public ResultadoDTO encontrarProfissionalPorSlug(String slug) throws MediSinaisExcecao {

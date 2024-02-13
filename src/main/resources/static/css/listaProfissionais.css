@@ -139,7 +139,7 @@ hr {
     padding-left: 60px;
 }
 
-#cidade {
+.input-texto {
     width: 90%;
     height: 44px;
     padding: 1rem;

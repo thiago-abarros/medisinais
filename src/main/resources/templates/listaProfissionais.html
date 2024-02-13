@@ -21,8 +21,13 @@
             <h2>Filtros</h2>
             <form action="/pesquisa" method="GET">
                 <div class="sidebar location">
+                    <label class="title">Nome do profissional</label>
+                    <input type="text" name="nome" class="input-texto" id="nome-pesquisa" placeholder="Digite o nome">
+                </div>
+                <hr>
+                <div class="sidebar location">
                     <label class="title">Localização</label>
-                    <input type="text" name="cidade" id="cidade" placeholder="Digite a cidade">
+                    <input type="text" name="cidade" class="input-texto" id="cidade" placeholder="Digite a cidade">
                 </div>
                 <hr>
                 <div class="sidebar checkbox" id="especialidade">

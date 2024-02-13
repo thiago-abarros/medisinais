@@ -1,5 +1,6 @@
 package com.mang.medisinais.dto;
 
-public record FiltroDTO(String cidade, String especialidade, String planoSaude, String pagina) {
+public record FiltroDTO(String cidade, String especialidade, String planoSaude,
+                        String nome, String pagina) {
 
 }

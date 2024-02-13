@@ -1,3 +1,15 @@
+var input = document.getElementById('nome-pesquisa');
+
+input.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        var form = input.closest('form');
+
+        if (form) {
+            form.submit();
+        }
+    }
+});
+
 function pegarQueryParam(parametro) {
     var urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(parametro);
@@ -19,9 +31,14 @@ function marcarCheckbox(valores, idDiv) {
     });
 }
 
+var nome = pegarQueryParam('nome');
 var cidade = pegarQueryParam('cidade');
 var plano = pegarQueryParam('planoSaude');
 var especialidade = pegarQueryParam('especialidade');
+
+if(nome != null) {
+    document.getElementById('nome-pesquisa').value = nome;
+}
 
 if(cidade != null) {
     document.getElementById('cidade').value = cidade;

@@ -29,4 +29,15 @@ public class ProfissionalSpecification {
         cb.equal(root.join("planosAceitos", JoinType.INNER).get("nome"), planoSaude);
   }
 
+  public static Specification<Profissional> temNome(String nome) {
+    return (root, query, cb) -> {
+      if(nome == null || nome.isEmpty()) {
+        return cb.conjunction();
+      } else {
+        String nomeMinusculo = "%" + nome.toLowerCase() + "%";
+        return cb.like(cb.lower(root.get("nome")), nomeMinusculo);
+      }
+    };
+  }
+
 }
