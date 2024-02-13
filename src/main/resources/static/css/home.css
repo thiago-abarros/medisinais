@@ -145,6 +145,14 @@ header button {
     width: 100%;
 }
 
+.bottom-search form {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    gap: 30px;
+}
+
 #search-input {
     width: 100%;
     height: 60px;
